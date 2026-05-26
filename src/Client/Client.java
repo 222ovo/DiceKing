@@ -13,8 +13,12 @@ public class Client {
             try {
                 String msg = player.in.readUTF();
                 if(msg != null) {
-                    playerNum = Integer.parseInt(msg);
-                    System.out.println(playerNum);
+                    //通过不同的字符串实现协议解析
+                    if(msg.startsWith("UpdatePlayersNum")) {
+                        String numStr = msg.substring("UpdatePlayersNum".length()).trim();
+                        playerNum = Integer.parseInt(numStr);
+                        System.out.println("当前玩家数量:" + playerNum);
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

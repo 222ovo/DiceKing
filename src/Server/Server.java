@@ -30,10 +30,14 @@ public class Server {
             players.add(player);
             new Thread(player).start();
             System.out.println("一名玩家加入了房间，当前房间人数：" + players.size());
-            for(ServerPlayer serverPlayer : players) {
-                serverPlayer.sendMessage(String.valueOf(players.size()));
-            }
-            //player.sendMessage(String.valueOf(players.size()));
+            updatePlayersNum();
+        }
+    }
+    public static void updatePlayersNum()
+    {
+        //通过不同的字符串实现协议解析
+        for(ServerPlayer serverPlayer : players) {
+            serverPlayer.sendMessage("UpdatePlayersNum" + players.size());
         }
     }
 

@@ -36,15 +36,11 @@ public class ServerPlayer implements Runnable {
         } catch (EOFException e) {
             System.out.println("客户端正常断开");
             removePlayer(this);
-            for(ServerPlayer serverPlayer : Server.players) {
-                serverPlayer.sendMessage(String.valueOf(Server.players.size()));
-            }
+            Server.updatePlayersNum();
         } catch (IOException e) {
             System.out.println("客户端异常断开");
             removePlayer(this);
-            for(ServerPlayer serverPlayer : Server.players) {
-                serverPlayer.sendMessage(String.valueOf(Server.players.size()));
-            }
+            Server.updatePlayersNum();
         }
     }
 
@@ -57,8 +53,7 @@ public class ServerPlayer implements Runnable {
         }
     }
 
-    public void removePlayer(ServerPlayer socket)
-    {
+    public void removePlayer(ServerPlayer socket) {
         Server.players.remove(socket);
     }
 }

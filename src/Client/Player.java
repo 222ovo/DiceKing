@@ -14,6 +14,7 @@ public class Player{
     DataInputStream in;
     DataOutputStream out;
     Socket socket = new Socket();
+    boolean isReady = false;
     public Player()
     {
         GameWindow window = new GameWindow();

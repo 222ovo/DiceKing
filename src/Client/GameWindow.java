@@ -63,7 +63,7 @@ public class GameWindow extends JPanel{
 
     private void drawPlayers(Graphics g)
     {
-        for(int i = 0 ; i < /*Client.playerNum*/5;i++)
+        for(int i = 0 ; i < Client.playerNum;i++)
         {
             switch(i)
             {
