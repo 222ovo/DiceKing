@@ -10,11 +10,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Player{
-    public ArrayList<PlayerData> playerDataList = new ArrayList<>();    //存储所有玩家数据的列表
+    public static ArrayList<PlayerData> playerDataList = new ArrayList<>();    //存储所有玩家数据的列表
     DataInputStream in;
     DataOutputStream out;
     Socket socket = new Socket();
     boolean isReady = false;
+    private int id;     //每个玩家对应一个编号，对应玩家数组的序号
     public Player()
     {
         GameWindow window = new GameWindow();
@@ -34,6 +35,7 @@ public class Player{
         } catch (IOException e) {
             System.out.println("断开连接");
         }
+        window.setPlayer(this);
     }
 
     public void sendMessage(String s)
@@ -45,4 +47,13 @@ public class Player{
         }
     }
 
+    public void setID(int id)
+    {
+        this.id = id;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
 }

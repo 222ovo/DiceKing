@@ -2,13 +2,22 @@ package Client;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GameWindow extends JPanel{
 
+    Player player;//当前客户端玩家
+    //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
+    //游戏背景图
     ImageIcon back = new ImageIcon("BackGround.jpg");
     JLabel bg = new JLabel(back);
+    //准备按钮图
+    ImageIcon ready = new ImageIcon("ready.png");
+    JButton readyButton = new JButton(ready);
+    //取消准备按钮图
+    ImageIcon unReady = new ImageIcon("unready.png");
     //窗口位置
     int x;
     int y;
@@ -39,11 +48,32 @@ public class GameWindow extends JPanel{
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
 
-        (new Timer(16, (e) -> {
-            this.repaint();
-        })).start();
+        readyButton.setContentAreaFilled(false);
+        readyButton.setBorder(null);
+        readyButton.setBounds(1920 / 2 - ready.getIconWidth() - 40, 1080 / 2 + ready.getIconHeight(), ready.getIconWidth()-1, ready.getIconHeight());
+        readyButton.setOpaque(false);
+        mainFrame.getLayeredPane().add(readyButton);
+
+        readyButton.addActionListener(e -> {
+            if(!player.isReady) {
+                player.isReady = true;
+                readyButton.setIcon(unReady);
+                System.out.println("玩家" + player.getId() + "已准备");
+            }
+            else if(player.isReady){
+                player.isReady = false;
+                readyButton.setIcon(ready);
+                System.out.println("玩家" + player.getId() + "取消准备");
+            }
+        });
+//        (new Timer(16, (e) -> {
+//            this.repaint();
+//        })).start();
     }
 
+    public void setPlayer(Player player){
+        this.player = player;
+    }
 
     @Override
     public void paintComponent(Graphics g)
