@@ -38,10 +38,19 @@ public class Player{
         window.setPlayer(this);
     }
 
-    public void sendMessage(String s)
+    public void sendMsg(String s)
     {
         try {
             out.writeUTF(s);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String receiveMsg()
+    {
+        try {
+            return in.readUTF();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

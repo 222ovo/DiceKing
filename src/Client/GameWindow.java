@@ -3,6 +3,11 @@ package Client;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+
+import static java.lang.Thread.sleep;
 
 public class GameWindow extends JPanel{
 
@@ -59,11 +64,36 @@ public class GameWindow extends JPanel{
                 player.isReady = true;
                 readyButton.setIcon(unReady);
                 System.out.println("玩家" + player.getId() + "已准备");
+                try {
+                    player.out.writeUTF("ready");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             else if(player.isReady){
                 player.isReady = false;
                 readyButton.setIcon(ready);
                 System.out.println("玩家" + player.getId() + "取消准备");
+                try {
+                    player.out.writeUTF("unready");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    // 1. 发送退出消息
+                      player.sendMsg("quit");
+                    System.exit(0); // 直接结束进程
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    System.exit(0);
+                }
             }
         });
 //        (new Timer(16, (e) -> {

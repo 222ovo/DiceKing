@@ -15,6 +15,7 @@ public class Server {
     {
         ServerSocket server = new ServerSocket(8888);
         System.out.println("服务器已启动!");
+        PlayerManager playerManager = new PlayerManager();
         while(true)
         {
             System.out.println("等待玩家加入");
@@ -27,8 +28,9 @@ public class Server {
                 continue;
             }
             ServerPlayer player = new ServerPlayer(socket);
+            //需要启动一个专门用来接受玩家信息的线程
+            new PlayerMsg(player).start();
             players.add(player);
-            new Thread(player).start();
             System.out.println("一名玩家加入了房间，当前房间人数：" + players.size());
             updatePlayersNum();
         }
@@ -36,9 +38,30 @@ public class Server {
     public static void updatePlayersNum()
     {
         //通过不同的字符串实现协议解析
-        for(ServerPlayer serverPlayer : players) {
-            serverPlayer.sendMessage("UpdatePlayersNum" + players.size());
+        sendMsgForAll("UpdatePlayersNum" + players.size());
+    }
+
+    /**
+     * @title: sendMsgForAll
+     * @description: 给所有玩家发送消息
+     * @String: 发送的消息
+     */
+    public static void sendMsgForAll(String s)
+    {
+        for(ServerPlayer serverPlayer : players)
+        {
+            serverPlayer.sendMsg(s);
         }
+    }
+
+    /**
+     * @description: 给编号为id的玩家发送消息
+     * @param id 玩家的编号
+     * @param s 发送的消息
+     */
+    public static void sendMsgTo(int id,String s)
+    {
+        players.get(id).sendMsg(s);
     }
 
 }
