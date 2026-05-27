@@ -47,7 +47,7 @@ public class PlayerMsg extends Thread{
         String playerMessage;//放玩家消息
         while(isRunning){//每隔0.01秒服务器向玩家询问准备状态,若所有玩家都准备了,则房间信号置true
             if (PlayerManager.Instance.ready()) {//房间开始信号
-                player.sendMsg("start");//提示玩家开始游戏
+                Server.sendMsgForAll("start");//提示玩家开始游戏
 //                player.receiveMsg();
                 PlayerManager.Instance.clearAllReadPlayers();//开始游戏后重置准备玩家
                 System.out.println("游戏开始");
@@ -75,6 +75,7 @@ public class PlayerMsg extends Thread{
                     throw new RuntimeException(e);
                 }
                 player.safeDisconnect();    //玩家退出，切断输入流，输出流和字节套
+                Server.updatePlayersNum();
                 isRunning = false;
             }
         }

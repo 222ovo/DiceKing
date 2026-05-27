@@ -9,6 +9,12 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+enum GameState{
+    BEFORE_START,
+    RUNNING,
+    OVER
+}
+
 public class Player{
     public static ArrayList<PlayerData> playerDataList = new ArrayList<>();    //存储所有玩家数据的列表
     DataInputStream in;
@@ -16,6 +22,7 @@ public class Player{
     Socket socket = new Socket();
     boolean isReady = false;
     private int id;     //每个玩家对应一个编号，对应玩家数组的序号
+    GameState gameState = GameState.BEFORE_START;   //游戏状态
     public Player()
     {
         GameWindow window = new GameWindow();
@@ -64,5 +71,15 @@ public class Player{
     public int getId()
     {
         return id;
+    }
+
+    public GameState getGameState()
+    {
+        return gameState;
+    }
+
+    public void setGameState(GameState newGameState)
+    {
+        gameState = newGameState;
     }
 }

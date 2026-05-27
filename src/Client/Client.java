@@ -20,6 +20,11 @@ public class Client {
                         System.out.println("当前玩家数量:" + playerNum);
                         player.setID(playerNum - 1);
                     }
+                    else if(msg.equals("start"))
+                    {
+                        System.out.println("start");
+                        player.setGameState(GameState.RUNNING);
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
