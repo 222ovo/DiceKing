@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Random;
 
 import static java.lang.Thread.sleep;
 
@@ -21,12 +22,12 @@ public class GameWindow extends JPanel{
     JButton readyButton = new JButton(ready);
     //取消准备按钮图
     ImageIcon unReady = new ImageIcon("unready.png");
-    //窗口位置
-    int x;
-    int y;
-    //窗口大小
-    int width;
-    int height;
+//    //窗口位置
+//    int x;
+//    int y;
+//    //窗口大小
+//    int width;
+//    int height;
     public GameWindow()
     {
         MapLoader.initialMap();
@@ -153,7 +154,6 @@ public class GameWindow extends JPanel{
     //画地图
     private void drawMap(Graphics g)
     {
-        System.out.println("画地图" + MapLoader.grids.size());
         for(Grid grid : MapLoader.grids)
         {
             grid.draw(g);
@@ -311,5 +311,11 @@ public class GameWindow extends JPanel{
                 break;
             }
         }
+    }
+
+    public void initGame()
+    {
+        readyButton.setVisible(false);
+
     }
 }

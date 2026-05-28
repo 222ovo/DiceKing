@@ -23,6 +23,7 @@ public class Player{
     boolean isReady = false;
     private int id = -1;     //每个玩家对应一个编号，对应玩家数组的序号
     GameState gameState = GameState.BEFORE_START;   //游戏状态
+    private GameWindow gameWindow;
     public Player()
     {
         try {
@@ -41,8 +42,8 @@ public class Player{
         } catch (IOException e) {
             System.out.println("断开连接");
         }
-        GameWindow window = new GameWindow();
-        window.setPlayer(this);
+        gameWindow = new GameWindow();
+        gameWindow.setPlayer(this);
     }
 
     public void sendMsg(String s)
@@ -82,5 +83,15 @@ public class Player{
     public void setGameState(GameState newGameState)
     {
         gameState = newGameState;
+    }
+
+    public GameWindow getGameWindow()
+    {
+        return gameWindow;
+    }
+
+    public void setGameWindow(GameWindow gameWindow)
+    {
+        this.gameWindow = gameWindow;
     }
 }

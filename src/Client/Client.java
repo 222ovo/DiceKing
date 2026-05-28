@@ -25,6 +25,7 @@ public class Client {
                     {
                         System.out.println("start");
                         player.setGameState(GameState.RUNNING);
+                        player.getGameWindow().initGame();
                     }
                     else if(msg.startsWith("UpdatePlayerGold"))
                     {
@@ -32,6 +33,10 @@ public class Client {
                         String goldNum = msg.substring("UpdatePlayerGold".length() + 1).trim();
                         System.out.println("玩家" + playerID + "金币变化" + goldNum);
                         PlayerData.changePlayerGold(playerID,Integer.parseInt(goldNum));
+                    }
+                    else if(msg.equals("YourRound"))
+                    {
+                        System.out.println("到你的回合了");
                     }
                 }
             } catch (IOException e) {
