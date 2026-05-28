@@ -1,6 +1,9 @@
 package Client;
 
-public class MoveGrid extends Grid{
+import java.io.Serializable;
+
+//移动格子
+public class MoveGrid extends Grid implements Serializable {
 
     public MoveGrid(int x, int y)
     {

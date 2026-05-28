@@ -2,9 +2,7 @@ package Client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 import static java.lang.Thread.sleep;
@@ -108,11 +106,18 @@ public class GameWindow extends JPanel{
     @Override
     public void paintComponent(Graphics g)
     {
+        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+        g.setFont(font);
+
         super.paintComponent(g);
         //画地图
         drawMap(g);
         //画玩家
         drawPlayers(g);
+        //画金币
+        drawGold(g);
+        //画房产本
+        drawBuildingBook(g);
     }
 
     //画地图
@@ -123,8 +128,6 @@ public class GameWindow extends JPanel{
 
     private void drawPlayers(Graphics g)
     {
-        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-        g.setFont(font);
         for(int i = 0 ; i < Client.playerNum;i++)
         {
             switch(i) {
@@ -191,5 +194,96 @@ public class GameWindow extends JPanel{
                     break;
             }
         }
+    }
+
+    public void drawGold(Graphics g)
+    {
+        g.setColor(Color.yellow);
+        for(int i = 0 ; i < Client.playerNum;i++)
+        {
+            switch(i) {
+                case 0:
+                {
+                    g.drawString("金币:" + Player.playerDataList.get(0).getGold(),40,580);
+                }
+                break;
+                case 1: {
+                    g.drawString("金币:" + Player.playerDataList.get(1).getGold(),770,180);
+                }
+                break;
+                case 2: {
+                    g.drawString("金币:" + Player.playerDataList.get(2).getGold(),1530,580);
+                }
+                break;
+                case 3: {
+                    g.drawString("金币:" + Player.playerDataList.get(3).getGold(),1050,1000);
+                }
+                break;
+                case 4: {
+                    g.drawString("金币:" + Player.playerDataList.get(4).getGold(),470,1000);
+                }
+                break;
+            }
+        }
+    }
+
+    public void drawBuildingBook(Graphics g)
+    {
+        Font font = new Font("微软雅黑", Font.PLAIN, 24);
+        g.setFont(font);
+        for(int i = 0 ; i < Client.playerNum;i++)
+        {
+            switch(i) {
+                case 0:
+                {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(160,420,40,60);
+                    g.setColor(Color.GRAY);
+                    g.drawString("房",167,440);
+                    g.drawString("产",167,475);
+                }
+                break;
+                case 1: {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(890,20,40,60);
+                    g.setColor(Color.GRAY);
+                    g.drawString("房",897,40);
+                    g.drawString("产",897,75);
+                }
+                break;
+                case 2: {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(1650,420,40,60);
+                    g.setColor(Color.GRAY);
+                    g.drawString("房",1657,440);
+                    g.drawString("产",1657,475);
+                }
+                break;
+                case 3: {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(1170,840,40,60);
+                    g.setColor(Color.GRAY);
+                    g.drawString("房",1177,840);
+                    g.drawString("产",1177,895);
+                }
+                break;
+                case 4: {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(270,420,40,60);
+                    g.setColor(Color.GRAY);
+                    g.drawString("房",277,440);
+                    g.drawString("产",277,475);;
+                }
+                break;
+            }
+        }
+
+        addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+
+            }
+        });
     }
 }

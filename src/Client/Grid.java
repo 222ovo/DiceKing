@@ -1,8 +1,9 @@
 package Client;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Grid {
+public abstract class Grid implements Serializable {
     int x;
     int y;
     int width = Setting.GRID_WIDTH;

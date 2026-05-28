@@ -3,6 +3,7 @@ package Client;
 import java.util.ArrayList;
 
 public class MapLoader {
+    public static final String MAP_DATA = "map.dat";
     public static final ArrayList<Grid> grids = new ArrayList<>();  //存储所有格子的列表
     //第一次游戏初始化地图
     public static void initialMap()

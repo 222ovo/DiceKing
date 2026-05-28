@@ -1,6 +1,8 @@
 package Client;
 
-public class BuildingGrid extends Grid{
+import java.io.Serializable;
+
+public class BuildingGrid extends Grid implements Serializable {
 
     public BuildingGrid(int x, int y)
     {

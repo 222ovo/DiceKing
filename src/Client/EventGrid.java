@@ -1,6 +1,8 @@
 package Client;
 
-public class EventGrid extends Grid{
+import java.io.Serializable;
+
+public class EventGrid extends Grid implements Serializable {
 
     public EventGrid(int x,int y)
     {

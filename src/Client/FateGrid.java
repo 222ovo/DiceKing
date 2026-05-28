@@ -1,6 +1,8 @@
 package Client;
 
-public class FateGrid extends Grid{
+import java.io.Serializable;
+
+public class FateGrid extends Grid implements Serializable {
     public FateGrid(int x,int y)
     {
         super(x,y);
