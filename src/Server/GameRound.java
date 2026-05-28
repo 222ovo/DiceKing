@@ -12,6 +12,6 @@ public class GameRound {
 
     public void gameStart()
     {
-
+        Server.playerGoldChange("1",2000);
     }
 }

@@ -113,7 +113,7 @@ public class GameWindow extends JPanel{
                 {
                     System.out.println("打开玩家" + 2 + "的房产本");
                 }
-                if(1170 <= x && x <= 1190 && 840 <= y && y <= 800)
+                if(1170 <= x && x <= 1190 && 840 <= y && y <= 900)
                 {
                     System.out.println("打开玩家" + 3 + "的房产本");
                 }

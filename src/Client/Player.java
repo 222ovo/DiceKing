@@ -21,7 +21,7 @@ public class Player{
     DataOutputStream out;
     Socket socket = new Socket();
     boolean isReady = false;
-    private int id;     //每个玩家对应一个编号，对应玩家数组的序号
+    private int id = -1;     //每个玩家对应一个编号，对应玩家数组的序号
     GameState gameState = GameState.BEFORE_START;   //游戏状态
     public Player()
     {

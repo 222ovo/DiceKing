@@ -29,4 +29,15 @@ public class PlayerData {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     *
+     * @title:改变玩家金币数量
+     * @param id 玩家id
+     */
+    public static void changePlayerGold(String id,int goldNum)
+    {
+        PlayerData player = Player.playerDataList.get(Integer.parseInt(id));
+        player.setGold(player.getGold() + goldNum);
+    }
 }
