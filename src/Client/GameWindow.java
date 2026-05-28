@@ -140,14 +140,14 @@ public class GameWindow extends JPanel{
         g.setFont(font);
 
         super.paintComponent(g);
-        //画地图
-        drawMap(g);
         //画玩家
         drawPlayers(g);
         //画金币
         drawGold(g);
         //画房产本
         drawBuildingBook(g);
+        //画地图
+        drawMap(g);
     }
 
     //画地图
@@ -273,7 +273,7 @@ public class GameWindow extends JPanel{
                     g.setColor(Color.ORANGE);
                     g.fillRect(160,420,40,60);
                     g.setColor(Color.GRAY);
-                    g.drawString("房",167,440);
+                    g.drawString("地",167,440);
                     g.drawString("产",167,475);
                 }
                 break;
@@ -281,7 +281,7 @@ public class GameWindow extends JPanel{
                     g.setColor(Color.ORANGE);
                     g.fillRect(890,20,40,60);
                     g.setColor(Color.GRAY);
-                    g.drawString("房",897,40);
+                    g.drawString("地",897,40);
                     g.drawString("产",897,75);
                 }
                 break;
@@ -289,7 +289,7 @@ public class GameWindow extends JPanel{
                     g.setColor(Color.ORANGE);
                     g.fillRect(1650,420,40,60);
                     g.setColor(Color.GRAY);
-                    g.drawString("房",1657,440);
+                    g.drawString("地",1657,440);
                     g.drawString("产",1657,475);
                 }
                 break;
@@ -297,7 +297,7 @@ public class GameWindow extends JPanel{
                     g.setColor(Color.ORANGE);
                     g.fillRect(1170,840,40,60);
                     g.setColor(Color.GRAY);
-                    g.drawString("房",1177,840);
+                    g.drawString("地",1177,840);
                     g.drawString("产",1177,895);
                 }
                 break;
@@ -305,7 +305,7 @@ public class GameWindow extends JPanel{
                     g.setColor(Color.ORANGE);
                     g.fillRect(270,420,40,60);
                     g.setColor(Color.GRAY);
-                    g.drawString("房",277,440);
+                    g.drawString("地",277,440);
                     g.drawString("产",277,475);;
                 }
                 break;
