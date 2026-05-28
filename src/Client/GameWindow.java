@@ -29,6 +29,7 @@ public class GameWindow extends JPanel{
     int height;
     public GameWindow()
     {
+        MapLoader.initialMap();
         this.setBounds(0, 0,
                 back.getIconWidth(),
                 back.getIconHeight());
@@ -152,7 +153,11 @@ public class GameWindow extends JPanel{
     //画地图
     private void drawMap(Graphics g)
     {
-
+        System.out.println("画地图" + MapLoader.grids.size());
+        for(Grid grid : MapLoader.grids)
+        {
+            grid.draw(g);
+        }
     }
 
     private void drawPlayers(Graphics g)

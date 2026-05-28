@@ -11,8 +11,8 @@ public abstract class Grid implements Serializable {
     Color color;
     public Grid(int x,int y)
     {
-        x = this.x;
-        y = this.y;
+        this.x = x;
+        this.y = y;
     }
     //踩中格子的效果
     public abstract void stepEvent();
@@ -20,6 +20,8 @@ public abstract class Grid implements Serializable {
     public void draw(Graphics g)
     {
         g.setColor(color);
+        g.fillRect(x,y,width,height);
+        g.setColor(Color.BLACK);
         g.drawRect(x,y,width,height);
     }
 }
