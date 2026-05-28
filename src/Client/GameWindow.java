@@ -94,6 +94,35 @@ public class GameWindow extends JPanel{
                 }
             }
         });
+
+        addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                int x = e.getX();
+                int y = e.getY();
+                if(160 <= x && x <= 200 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 0 + "的房产本");
+                }
+                if(890 <= x && x <= 930 && 20 <= y && y <= 80)
+                {
+                    System.out.println("打开玩家" + 1 + "的房产本");
+                }
+                if(1650 <= x && x <= 1690 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 2 + "的房产本");
+                }
+                if(1170 <= x && x <= 1190 && 840 <= y && y <= 800)
+                {
+                    System.out.println("打开玩家" + 3 + "的房产本");
+                }
+                if(270 <= x && x <= 290 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 4 + "的房产本");
+                }
+            }
+        });
 //        (new Timer(16, (e) -> {
 //            this.repaint();
 //        })).start();
@@ -277,13 +306,5 @@ public class GameWindow extends JPanel{
                 break;
             }
         }
-
-        addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-
-            }
-        });
     }
 }
