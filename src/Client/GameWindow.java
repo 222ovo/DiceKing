@@ -125,42 +125,72 @@ public class GameWindow extends JPanel{
     {
         for(int i = 0 ; i < Client.playerNum;i++)
         {
-            switch(i)
-            {
+            switch(i) {
                 case 0:
+                {
                     g.setColor(Color.PINK);
-                    g.fillRect(50,420,Setting.PLAYER_HEAD_WIDTH,Setting.PLAYER_HEAD_HEIGHT);
+                    g.fillRect(50, 420, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.YELLOW);
-                    g.fillRect(70,440,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
-                    g.fillRect(115,440,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(70, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(115, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    if (player.getId() == 0) {
+                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+                        g.setFont(font);
+                        g.drawString("我", 85, 550);
+                    }
+                }
                     break;
-                case 1:
+                case 1: {
                     g.setColor(Color.YELLOW);
-                    g.fillRect(780,20,Setting.PLAYER_HEAD_WIDTH,Setting.PLAYER_HEAD_HEIGHT);
+                    g.fillRect(780, 20, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.BLUE);
-                    g.fillRect(800,40,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
-                    g.fillRect(845,40,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(800, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(845, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    if (player.getId() == 1) {
+                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+                        g.setFont(font);
+                        g.drawString("我", 815, 150);
+                    }
+                }
                     break;
-                case 2:
+                case 2: {
                     g.setColor(Color.RED);
-                    g.fillRect(1540,420,Setting.PLAYER_HEAD_WIDTH,Setting.PLAYER_HEAD_HEIGHT);
+                    g.fillRect(1540, 420, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.YELLOW);
-                    g.fillRect(1560,440,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
-                    g.fillRect(1605,440,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(1560, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(1605, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    if (player.getId() == 2) {
+                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+                        g.setFont(font);
+                        g.drawString("我", 1575, 550);
+                    }
+                }
                     break;
-                case 3:
+                case 3: {
                     g.setColor(Color.YELLOW);
-                    g.fillRect(1060,840,Setting.PLAYER_HEAD_WIDTH,Setting.PLAYER_HEAD_HEIGHT);
+                    g.fillRect(1060, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.BLUE);
-                    g.fillRect(1080,860,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
-                    g.fillRect(1125,860,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(1080, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(1125, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    if (player.getId() == 3) {
+                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+                        g.setFont(font);
+                        g.drawString("我", 1095, 970);
+                    }
+                }
                     break;
-                case 4:
+                case 4: {
                     g.setColor(Color.YELLOW);
-                    g.fillRect(480,840,Setting.PLAYER_HEAD_WIDTH,Setting.PLAYER_HEAD_HEIGHT);
+                    g.fillRect(480, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.BLUE);
-                    g.fillRect(500,860,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
-                    g.fillRect(545,860,Setting.PLAYER_EYE_WIDTH,Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(500, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    g.fillRect(545, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
+                    if (player.getId() == 4) {
+                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+                        g.setFont(font);
+                        g.drawString("我", 515, 970);
+                    }
+                }
                     break;
             }
         }

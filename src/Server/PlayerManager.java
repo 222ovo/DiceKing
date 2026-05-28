@@ -27,12 +27,17 @@ public class PlayerManager {
     }
     public boolean ready()
     {
-        if(readyPlayer.size() == Server.players.size())
+        if( readyPlayer.size() >= 2 ) //如果至少有两个玩家加入游戏，且全部准备
         {
-            System.out.println("所有玩家都准备了");
-            return true;
+            System.out.println("玩家数量足够可以开始游戏");
+            if(readyPlayer.size() == Server.players.size()) {
+                System.out.println("所有玩家都准备了");
+                return true;
+            }
+            System.out.println("有玩家没有准备");
+            return false;
         }
-        System.out.println("有玩家没有准备");
+        System.out.println("玩家数量太少，无法开始游戏");
         return false;
     }
 

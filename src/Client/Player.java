@@ -66,6 +66,7 @@ public class Player{
     public void setID(int id)
     {
         this.id = id;
+        System.out.println("你的游戏id为" + id);
     }
 
     public int getId()
