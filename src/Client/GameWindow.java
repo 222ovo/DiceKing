@@ -123,6 +123,8 @@ public class GameWindow extends JPanel{
 
     private void drawPlayers(Graphics g)
     {
+        Font font = new Font("微软雅黑", Font.PLAIN, 32);
+        g.setFont(font);
         for(int i = 0 ; i < Client.playerNum;i++)
         {
             switch(i) {
@@ -134,10 +136,9 @@ public class GameWindow extends JPanel{
                     g.fillRect(70, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(115, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 0) {
-                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-                        g.setFont(font);
                         g.drawString("我", 85, 550);
                     }
+                    g.drawString("金币:" + Player.playerDataList.get(0).getGold(),40,580);
                 }
                     break;
                 case 1: {
@@ -147,10 +148,9 @@ public class GameWindow extends JPanel{
                     g.fillRect(800, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(845, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 1) {
-                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-                        g.setFont(font);
                         g.drawString("我", 815, 150);
                     }
+                    g.drawString("金币:" + Player.playerDataList.get(1).getGold(),770,180);
                 }
                     break;
                 case 2: {
@@ -160,10 +160,9 @@ public class GameWindow extends JPanel{
                     g.fillRect(1560, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(1605, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 2) {
-                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-                        g.setFont(font);
                         g.drawString("我", 1575, 550);
                     }
+                    g.drawString("金币:" + Player.playerDataList.get(2).getGold(),1530,580);
                 }
                     break;
                 case 3: {
@@ -173,10 +172,9 @@ public class GameWindow extends JPanel{
                     g.fillRect(1080, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(1125, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 3) {
-                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-                        g.setFont(font);
                         g.drawString("我", 1095, 970);
                     }
+                    g.drawString("金币:" + Player.playerDataList.get(3).getGold(),1050,1000);
                 }
                     break;
                 case 4: {
@@ -186,14 +184,12 @@ public class GameWindow extends JPanel{
                     g.fillRect(500, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(545, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 4) {
-                        Font font = new Font("微软雅黑", Font.PLAIN, 32);
-                        g.setFont(font);
                         g.drawString("我", 515, 970);
                     }
+                    g.drawString("金币:" + Player.playerDataList.get(4).getGold(),470,1000);
                 }
                     break;
             }
         }
     }
 }
-

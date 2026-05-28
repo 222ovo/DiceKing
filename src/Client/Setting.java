@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Setting {
+    public static final int MAX_PLAYERS_NUM = 5;
     //格子大小
     public static final int GRID_WIDTH = 40;
     public static final int GRID_HEIGHT = 40;

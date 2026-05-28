@@ -25,7 +25,6 @@ public class Player{
     GameState gameState = GameState.BEFORE_START;   //游戏状态
     public Player()
     {
-        GameWindow window = new GameWindow();
         try {
             String ip = "127.0.0.1";
             InetSocketAddress socketAddress = new InetSocketAddress(ip,8888);
@@ -34,7 +33,7 @@ public class Player{
             in = new DataInputStream(this.socket.getInputStream());
             out = new DataOutputStream(this.socket.getOutputStream());
 
-            for(int i = 0;i < Client.playerNum;i++)
+            for(int i = 0;i < Setting.MAX_PLAYERS_NUM;i++)
             {
                 PlayerData data = new PlayerData(Setting.INITIAL_X,Setting.INITIAL_Y,Setting.INITIAL_GOLD,i);
                 playerDataList.add(data);
@@ -42,6 +41,7 @@ public class Player{
         } catch (IOException e) {
             System.out.println("断开连接");
         }
+        GameWindow window = new GameWindow();
         window.setPlayer(this);
     }
 
