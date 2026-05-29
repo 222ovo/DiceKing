@@ -13,8 +13,8 @@ public abstract class Grid implements Serializable {
     public Grid(GridPos gridPos)
     {
         this.gridPos = gridPos;
-        this.x = gridPos.changeToWorldPos(gridPos.x);
-        this.y = gridPos.changeToWorldPos(gridPos.y);
+        this.x = GridPos.changeToWorldPos(gridPos.x);
+        this.y = GridPos.changeToWorldPos(gridPos.y);
     }
     //踩中格子的效果
     public abstract void stepEvent();

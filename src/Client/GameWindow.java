@@ -387,7 +387,7 @@ public class GameWindow extends JPanel{
 
         swingTimer.start();
 
-        player.Move(points[0]);
+//        player.Move(points[0]);
     }
 
     public void drawPlayersOnMap(Graphics g)

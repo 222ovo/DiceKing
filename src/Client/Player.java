@@ -65,17 +65,17 @@ public class Player{
         gameWindow.setPlayer(this);
     }
 
-    /**
-     * @title: 玩家移动
-     * @param points 移动格子数
-     */
-    public void Move(int points)
-    {
-        PlayerData data = playerDataList.get(id);
-        data.x += Setting.GRID_WIDTH;
-        GridPos gridPos = new GridPos(data.x, data.y);
-        System.out.println(MapLoader.map.get(gridPos));
-    }
+//    /**
+//     * @title: 玩家移动
+//     * @param points 移动格子数
+//     */
+//    public void Move(int points)
+//    {
+//        PlayerData data = playerDataList.get(id);
+//        data.x += Setting.GRID_WIDTH;
+//        GridPos gridPos = new GridPos(data.x, data.y);
+//        System.out.println(MapLoader.map.get(gridPos));
+//    }
     public void sendMsg(String s)
     {
         try {
