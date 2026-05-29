@@ -73,7 +73,7 @@ public class ServerPlayer{
     void safeDisconnect() {
         // 1️⃣ 先移除（防止再广播）
         Server.players.remove(this);
-        PlayerManager.Instance.readyPlayer.remove(this);
+        PlayerManager.Instance.getReadyPlayers().remove(this);
 
         // 2️⃣ 关闭流
         try { if (in != null) in.close(); } catch (IOException ignored) {}

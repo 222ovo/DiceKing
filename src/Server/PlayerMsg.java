@@ -8,7 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class PlayerMsg extends Thread{
     //一个玩家线程,用于选择房间到开始游戏之前的阶段
-    ServerPlayer player;//一个玩家
+    private ServerPlayer player;//一个玩家
     private boolean isRunning = true; //控制线程进行
     public PlayerMsg(Socket client) {
         this.player = new ServerPlayer(client);
