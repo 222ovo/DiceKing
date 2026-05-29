@@ -11,7 +11,10 @@ import static java.lang.Thread.sleep;
 public class GameWindow extends JPanel{
 
     public int i = 1;
-    Player player;//当前客户端玩家
+    //当前客户端玩家
+    Player player;
+    //骰子
+    Dice dice = new Dice();
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
@@ -30,6 +33,11 @@ public class GameWindow extends JPanel{
     ImageIcon dice4 = new ImageIcon("Dice4.png");
     ImageIcon dice5 = new ImageIcon("Dice5.png");
     ImageIcon dice6 = new ImageIcon("Dice6.png");
+    //投资帧动画
+    ImageIcon diceAnim1 = new ImageIcon("DiceFrame1.png");
+    ImageIcon diceAnim2 = new ImageIcon("DiceFrame2.png");
+    ImageIcon diceAnim3 = new ImageIcon("DiceFrame3.png");
+    ImageIcon diceAnim4 = new ImageIcon("DiceFrame4.png");
     JButton diceButton = new JButton(dice1);
 //    //窗口位置
 //    int x;
@@ -112,6 +120,13 @@ public class GameWindow extends JPanel{
             }
         });
 
+        diceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                diceAnimation();
+                dice.RollDice(player);
+            }
+        });
         addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e)
@@ -140,36 +155,36 @@ public class GameWindow extends JPanel{
                 }
             }
         });
-        (new Timer(100, (e) -> {
-            i = (i+1) % 6;
-            switch (i)
-            {
-                case 0:
-                    diceButton.setIcon(new ImageIcon("Dice1.png"));
-                    System.out.println(i);
-                    break;
-                case 1:
-                    diceButton.setIcon(new ImageIcon("Dice2.png"));
-                    System.out.println(i);
-                    break;
-                case 2:
-                    diceButton.setIcon(new ImageIcon("Dice3.png"));
-                    System.out.println(i);
-                    break;
-                case 3:
-                    diceButton.setIcon(new ImageIcon("Dice4.png"));
-                    System.out.println(i);
-                    break;
-                case 4:
-                    diceButton.setIcon(new ImageIcon("Dice5.png"));
-                    System.out.println(i);
-                    break;
-                case 5:
-                    diceButton.setIcon(new ImageIcon("Dice6.png"));
-                    System.out.println(i);
-                    break;
-            }
-        })).start();
+//        (new Timer(100, (e) -> {
+//            i = (i+1) % 6;
+//            switch (i)
+//            {
+//                case 0:
+//                    diceButton.setIcon(new ImageIcon("Dice1.png"));
+//                    System.out.println(i);
+//                    break;
+//                case 1:
+//                    diceButton.setIcon(new ImageIcon("Dice2.png"));
+//                    System.out.println(i);
+//                    break;
+//                case 2:
+//                    diceButton.setIcon(new ImageIcon("Dice3.png"));
+//                    System.out.println(i);
+//                    break;
+//                case 3:
+//                    diceButton.setIcon(new ImageIcon("Dice4.png"));
+//                    System.out.println(i);
+//                    break;
+//                case 4:
+//                    diceButton.setIcon(new ImageIcon("Dice5.png"));
+//                    System.out.println(i);
+//                    break;
+//                case 5:
+//                    diceButton.setIcon(new ImageIcon("Dice6.png"));
+//                    System.out.println(i);
+//                    break;
+//            }
+//        })).start();
     }
 
     public void setPlayer(Player player){
@@ -358,6 +373,28 @@ public class GameWindow extends JPanel{
     public void initGame()
     {
         readyButton.setVisible(false);
+
+    }
+
+    public void diceAnimation()
+    {
+        int[] timer = {0};
+        int animationDuration = 12;
+
+        Timer swingTimer = new Timer(500, e -> {
+            switch (timer[0] % 4) {
+                case 0 -> diceButton.setIcon(diceAnim1);
+                case 1 -> diceButton.setIcon(diceAnim2);
+                case 2 -> diceButton.setIcon(diceAnim3);
+                case 3 -> diceButton.setIcon(diceAnim4);
+            }
+            timer[0]++;
+            if (timer[0] >= animationDuration) {
+                ((Timer) e.getSource()).stop();
+            }
+        });
+
+        swingTimer.start();
 
     }
 }
