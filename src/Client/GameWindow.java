@@ -123,8 +123,7 @@ public class GameWindow extends JPanel{
         diceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                diceAnimation();
-                dice.RollDice(player);
+                rollDice();
             }
         });
         addMouseListener(new MouseAdapter(){
@@ -376,12 +375,25 @@ public class GameWindow extends JPanel{
 
     }
 
-    public void diceAnimation()
+    public void rollDice()
     {
         int[] timer = {0};
         int animationDuration = 12;
 
-        Timer swingTimer = new Timer(500, e -> {
+        Timer swingTimer = new Timer(100, e -> {
+            if (timer[0] >= animationDuration) {
+                int points = dice.RollDice(player);
+                switch (points) {
+                    case 1 -> diceButton.setIcon(dice1);
+                    case 2 -> diceButton.setIcon(dice2);
+                    case 3 -> diceButton.setIcon(dice3);
+                    case 4 -> diceButton.setIcon(dice4);
+                    case 5 -> diceButton.setIcon(dice5);
+                    case 6 -> diceButton.setIcon(dice6);
+                }
+                ((Timer) e.getSource()).stop();
+                return;
+            }
             switch (timer[0] % 4) {
                 case 0 -> diceButton.setIcon(diceAnim1);
                 case 1 -> diceButton.setIcon(diceAnim2);
@@ -389,9 +401,6 @@ public class GameWindow extends JPanel{
                 case 3 -> diceButton.setIcon(diceAnim4);
             }
             timer[0]++;
-            if (timer[0] >= animationDuration) {
-                ((Timer) e.getSource()).stop();
-            }
         });
 
         swingTimer.start();

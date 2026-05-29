@@ -31,15 +31,15 @@ public class MoveGrid extends Grid implements Serializable {
         if(move > 0) {
             font = new Font("微软雅黑", Font.PLAIN, 40);
             g.setFont(font);
-            g.drawString("前进", x+15, y + 35);
-            g.drawString(String.valueOf(move),x+33,y+70);
+            g.drawString("前进", x+10, y + 45);
+            g.drawString(String.valueOf(move),x+38,y+80);
         }
         else if(move < 0)
         {
             font = new Font("微软雅黑", Font.PLAIN, 40);
             g.setFont(font);
-            g.drawString("后退", x+15, y + 35);
-            g.drawString(String.valueOf(move),x+33,y+70);
+            g.drawString("后退", x+10, y + 45);
+            g.drawString(String.valueOf(move),x+30,y+80);
         }
     }
 }
