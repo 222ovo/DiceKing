@@ -7,19 +7,19 @@ public class GridPos {
     public int x;
     public int y;
 
-    private int scale = 100;    //缩放比例
+    private static int scale = 100;    //缩放比例
     public GridPos(int x, int y)
     {
         this.x = changeToMeshPos(x);
         this.y = changeToMeshPos(y);
     }
 
-    public int changeToWorldPos(int point)
+    public static int changeToWorldPos(int point)
     {
         return point*scale;
     }
 
-    public int changeToMeshPos(int point)
+    public static int changeToMeshPos(int point)
     {
         return point/scale;
     }

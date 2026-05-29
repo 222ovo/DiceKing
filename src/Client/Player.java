@@ -71,7 +71,10 @@ public class Player{
      */
     public void Move(int points)
     {
-        playerDataList.get(id).x += Setting.GRID_WIDTH;
+        PlayerData data = playerDataList.get(id);
+        data.x += Setting.GRID_WIDTH;
+        GridPos gridPos = new GridPos(data.x, data.y);
+        System.out.println(MapLoader.map.get(gridPos));
     }
     public void sendMsg(String s)
     {
