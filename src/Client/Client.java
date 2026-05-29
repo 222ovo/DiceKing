@@ -11,7 +11,7 @@ public class Client {
         while(true)
         {
             try {
-                String msg = player.in.readUTF();
+                String msg = player.getInputStream().readUTF();
                 if(msg != null) {
                     //通过不同的字符串实现协议解析
                     if(msg.startsWith("UpdatePlayersNum")) {

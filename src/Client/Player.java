@@ -17,8 +17,8 @@ enum GameState{
 
 public class Player{
     public static ArrayList<PlayerData> playerDataList = new ArrayList<>();    //存储所有玩家数据的列表
-    DataInputStream in;
-    DataOutputStream out;
+    private DataInputStream in;
+    private DataOutputStream out;
     Socket socket = new Socket();
     boolean isReady = false;
     private int id = -1;     //每个玩家对应一个编号，对应玩家数组的序号
@@ -93,5 +93,15 @@ public class Player{
     public void setGameWindow(GameWindow gameWindow)
     {
         this.gameWindow = gameWindow;
+    }
+
+    public DataOutputStream getOutputStream()
+    {
+        return out;
+    }
+
+    public DataInputStream getInputStream()
+    {
+        return in;
     }
 }

@@ -9,8 +9,7 @@ public class Dice {
     {
         Random r = new Random();
         points = r.nextInt(1,7);
-        System.out.println("玩家" + player.getId() + "掷出的点数为" + points);
-        player.sendMsg("RollDice" + player.getId() + points);
+        player.sendMsg("RollDice" + points);
         return points;
     }
 }

@@ -8,6 +8,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
 public class ServerPlayer{
 
@@ -60,6 +61,8 @@ public class ServerPlayer{
     {
         try {
             return in.readUTF();
+        } catch (SocketTimeoutException e) {
+            return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
