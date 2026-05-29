@@ -183,6 +183,7 @@ public class GameWindow extends JPanel{
 //        drawBuildingBook(g);
         //画地图
         drawMap(g);
+        drawPlayersOnMap(g);
     }
 
     //画地图
@@ -237,7 +238,7 @@ public class GameWindow extends JPanel{
                 }
                     break;
                 case 3: {
-                    g.setColor(Color.YELLOW);
+                    g.setColor(Color.ORANGE);
                     g.fillRect(1060, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.BLUE);
                     g.fillRect(1080, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
@@ -249,7 +250,7 @@ public class GameWindow extends JPanel{
                 }
                     break;
                 case 4: {
-                    g.setColor(Color.YELLOW);
+                    g.setColor(Color.GRAY);
                     g.fillRect(480, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
                     g.setColor(Color.BLUE);
                     g.fillRect(500, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
@@ -350,18 +351,19 @@ public class GameWindow extends JPanel{
     public void initGame()
     {
         readyButton.setVisible(false);
-
+        repaint();
     }
 
     public void rollDice()
     {
         int[] timer = {0};
         int animationDuration = 12;
+        int[] points = {0};
 
         Timer swingTimer = new Timer(100, e -> {
             if (timer[0] >= animationDuration) {
-                int points = dice.RollDice(player);
-                switch (points) {
+                points[0] = dice.RollDice(player);
+                switch (points[0]) {
                     case 1 -> diceButton.setIcon(dice1);
                     case 2 -> diceButton.setIcon(dice2);
                     case 3 -> diceButton.setIcon(dice3);
@@ -383,5 +385,19 @@ public class GameWindow extends JPanel{
 
         swingTimer.start();
 
+        player.Move(points[0]);
+    }
+
+    public void drawPlayersOnMap(Graphics g)
+    {
+        if(player.getGameState() == GameState.RUNNING)
+        {
+            for(int i = 0 ; i < Client.playerNum;i++)
+            {
+                PlayerData playerData = Player.playerDataList.get(i);
+                g.setColor(playerData.getColor());
+                g.fillRect(playerData.x,playerData.y,Setting.PLAYER_WIDTH,Setting.PLAYER_HEIGHT);
+            }
+        }
     }
 }

@@ -1,17 +1,21 @@
 package Client;
 
+import java.awt.*;
+
 public class PlayerData {
     int x;
     int y;
     private int gold;
-    private int id;
+    private int id = -1;
+    private Color color;
 
-    public PlayerData(int x,int y,int gold,int id)
+    public PlayerData(int x,int y,int gold,int id,Color color)
     {
         this.x = x;
         this.y = y;
         this.gold = gold;
         this.id = id;
+        this.color = color;
     }
 
     public int getGold() {
@@ -30,6 +34,10 @@ public class PlayerData {
         this.id = id;
     }
 
+    public Color getColor()
+    {
+        return color;
+    }
     /**
      *
      * @title:改变玩家金币数量

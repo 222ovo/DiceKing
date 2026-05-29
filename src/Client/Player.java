@@ -2,6 +2,7 @@ package Client;
 
 import Server.ServerPlayer;
 
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class Player{
     Socket socket = new Socket();
     boolean isReady = false;
     private int id = -1;     //每个玩家对应一个编号，对应玩家数组的序号
-    GameState gameState = GameState.BEFORE_START;   //游戏状态
+    private GameState gameState = GameState.BEFORE_START;   //游戏状态
     private GameWindow gameWindow;
     public Player()
     {
@@ -34,9 +35,27 @@ public class Player{
             in = new DataInputStream(this.socket.getInputStream());
             out = new DataOutputStream(this.socket.getOutputStream());
 
+            PlayerData data = null;
             for(int i = 0;i < Setting.MAX_PLAYERS_NUM;i++)
             {
-                PlayerData data = new PlayerData(Setting.INITIAL_X,Setting.INITIAL_Y,Setting.INITIAL_GOLD,i);
+                switch(i)
+                {
+                    case 0:
+                        data = new PlayerData(Setting.PLAYER0_X,Setting.PLAYER0_Y,Setting.INITIAL_GOLD,0,Setting.PLAYER0_COLOR);
+                        break;
+                    case 1:
+                        data = new PlayerData(Setting.PLAYER1_X,Setting.PLAYER1_Y,Setting.INITIAL_GOLD,1,Setting.PLAYER1_COLOR);
+                        break;
+                    case 2:
+                        data = new PlayerData(Setting.PLAYER2_X,Setting.PLAYER2_Y,Setting.INITIAL_GOLD,2,Setting.PLAYER2_COLOR);
+                        break;
+                    case 3:
+                        data = new PlayerData(Setting.PLAYER3_X,Setting.PLAYER3_Y,Setting.INITIAL_GOLD,3,Setting.PLAYER3_COLOR);
+                        break;
+                    case 4:
+                        data = new PlayerData(Setting.PLAYER4_X,Setting.PLAYER4_Y,Setting.INITIAL_GOLD,4,Setting.PLAYER4_COLOR);
+                        break;
+                }
                 playerDataList.add(data);
             }
         } catch (IOException e) {
@@ -46,6 +65,14 @@ public class Player{
         gameWindow.setPlayer(this);
     }
 
+    /**
+     * @title: 玩家移动
+     * @param points 移动格子数
+     */
+    public void Move(int points)
+    {
+
+    }
     public void sendMsg(String s)
     {
         try {
@@ -104,4 +131,5 @@ public class Player{
     {
         return in;
     }
+
 }
