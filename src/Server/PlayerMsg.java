@@ -48,7 +48,6 @@ public class PlayerMsg extends Thread{
             if ( PlayerManager.Instance.ready()) {//房间开始信号
                 player.sendMsg("start");//提示玩家开始游戏
                 System.out.println("游戏开始");
-//                player.receiveMsg();
                 isRunning = false;
                 return true;//返回true
             }

@@ -16,7 +16,7 @@ public class GameRound {
     public void gameStart()
     {
         Random r = new Random();
-        id = r.nextInt(0,players.size() - 1);//选出进行回合的玩家
+        id = r.nextInt(0,players.size());//选出进行回合的玩家
 
         while(true)
         {
