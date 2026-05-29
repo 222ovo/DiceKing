@@ -10,10 +10,9 @@ public class Setting {
     //格子大小
     public static final int GRID_WIDTH = 100;
     public static final int GRID_HEIGHT = 100;
-
-    //初始位置
-    public static final int INITIAL_X = 50;
-    public static final int INITIAL_Y = 50;
+    //地图大小
+    public static final int MAP_WIDTH = 1100;
+    public static final int MAP_HEIGHT = 600;
 
     //初始资金
     public static final int INITIAL_GOLD = 2000;

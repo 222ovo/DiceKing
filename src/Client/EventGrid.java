@@ -5,9 +5,9 @@ import java.io.Serializable;
 
 public class EventGrid extends Grid implements Serializable {
 
-    public EventGrid(int x,int y)
+    public EventGrid(GridPos gridPos)
     {
-        super(x,y);
+        super(gridPos);
         color = Setting.EVENT_GRID_COLOR;
     }
     //事件格子

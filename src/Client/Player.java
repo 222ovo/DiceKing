@@ -71,7 +71,7 @@ public class Player{
      */
     public void Move(int points)
     {
-
+        playerDataList.get(id).x += Setting.GRID_WIDTH;
     }
     public void sendMsg(String s)
     {

@@ -4,9 +4,9 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class FateGrid extends Grid implements Serializable {
-    public FateGrid(int x,int y)
+    public FateGrid(GridPos gridPos)
     {
-        super(x,y);
+        super(gridPos);
         color = Setting.FATE_GRID_COLOR;
     }
 

@@ -189,7 +189,7 @@ public class GameWindow extends JPanel{
     //画地图
     private void drawMap(Graphics g)
     {
-        for(Grid grid : MapLoader.grids)
+        for(Grid grid : MapLoader.map.values())
         {
             grid.draw(g);
         }
@@ -356,6 +356,8 @@ public class GameWindow extends JPanel{
 
     public void rollDice()
     {
+//        player.Move(1);
+//        repaint();
         int[] timer = {0};
         int animationDuration = 12;
         int[] points = {0};

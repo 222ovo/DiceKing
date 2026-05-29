@@ -7,9 +7,9 @@ import java.io.Serializable;
 public class MoveGrid extends Grid implements Serializable {
 
     private int move;
-    public MoveGrid(int x, int y,int move)
+    public MoveGrid(GridPos gridPos,int move)
     {
-        super(x,y);
+        super(gridPos);
         this.move = move;
         color = Setting.MOVE_GIRD_COLOR;
     }

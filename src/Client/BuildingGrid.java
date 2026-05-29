@@ -6,9 +6,9 @@ import java.io.Serializable;
 public class BuildingGrid extends Grid implements Serializable {
 
     private Building building;
-    public BuildingGrid(int x, int y,Building building)
+    public BuildingGrid(GridPos gridPos,Building building)
     {
-        super(x,y);
+        super(gridPos);
         this.building = building;
         color = Setting.BUILDING_GRID_COLOR;
     }
