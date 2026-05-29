@@ -27,11 +27,12 @@ public class Server {
                 socket.close();
                 continue;
             }
-            ServerPlayer player = new ServerPlayer(socket);
+            ServerPlayer player = new ServerPlayer(socket,players.size());
             //需要启动一个专门用来接受玩家信息的线程
             new PlayerMsg(player).start();
             players.add(player);
             System.out.println("一名玩家加入了房间，当前房间人数：" + players.size());
+
             updatePlayersNum();
         }
     }

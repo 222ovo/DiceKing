@@ -23,12 +23,17 @@ public class GameRound {
             id = (id+1)%players.size(); //当前玩家回合
             players.get(id).sendMsg("YourRound");   //给玩家发信息
 
-            String msg = players.get(id).receiveMsg();
-            if(msg.startsWith("RollDice"))
-            {
-                String points = msg.substring("RollDice".length());
-                System.out.println("玩家" + id + "掷出的点数为" + points);
-                Server.sendMsgForAll("RollDice" + id + points);
+            while(true) {
+                String msg = players.get(id).receiveMsg();
+                if (msg.startsWith("RollDice")) {
+                    String points = msg.substring("RollDice".length());
+                    System.out.println("玩家" + id + "掷出的点数为" + points);
+                    Server.sendMsgForAll("RollDice" + id + points);
+                }
+                if(msg.equals("Over"))
+                {
+                    break;
+                }
             }
         }
     }

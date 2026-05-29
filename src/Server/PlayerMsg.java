@@ -11,9 +11,6 @@ public class PlayerMsg extends Thread{
     //一个玩家线程,用于选择房间到开始游戏之前的阶段
     private ServerPlayer player;//一个玩家
     private boolean isRunning = true; //控制线程进行
-    public PlayerMsg(Socket client) {
-        this.player = new ServerPlayer(client);
-    }
 
     public PlayerMsg(ServerPlayer player)
     {
@@ -31,8 +28,9 @@ public class PlayerMsg extends Thread{
     public void run() {
         while (isRunning && !gameReady());//所有玩家都准备后break
 
-        new GameThread(Server.players).start();//开始游戏
-//        System.out.println("start");
+        //只开启一个游戏线程
+        if(player.getId() == 0)
+            new GameThread(Server.players).start();//开始游戏
     }
     /**
 
@@ -47,11 +45,10 @@ public class PlayerMsg extends Thread{
     public boolean gameReady(){
         String playerMessage;//放玩家消息
         while(isRunning){//每隔0.01秒服务器向玩家询问准备状态,若所有玩家都准备了,则房间信号置true
-            if (PlayerManager.Instance.ready()) {//房间开始信号
-                Server.sendMsgForAll("start");//提示玩家开始游戏
+            if ( PlayerManager.Instance.ready()) {//房间开始信号
+                player.sendMsg("start");//提示玩家开始游戏
                 System.out.println("游戏开始");
 //                player.receiveMsg();
-                PlayerManager.Instance.clearAllReadPlayers();//开始游戏后重置准备玩家
                 isRunning = false;
                 return true;//返回true
             }

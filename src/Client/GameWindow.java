@@ -79,17 +79,17 @@ public class GameWindow extends JPanel{
         diceButton.setBounds(1920 / 2 - diceButton.getIcon().getIconWidth() - 40, 1080 / 2 - diceButton.getIcon().getIconHeight() + 80, diceButton.getIcon().getIconWidth()-1,diceButton.getIcon().getIconHeight());
         diceButton.setOpaque(false);
         mainFrame.getLayeredPane().add(diceButton);
-//
-//        //定期给服务端发送消息，避免线程阻塞
-//        Timer timer = new Timer(1000,e -> {
-//            try {
-//                player.getOutputStream().writeUTF("Fresh");
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-//        });
-//
-//        timer.start();
+
+        //定期给服务端发送消息，避免线程阻塞
+        Timer timer = new Timer(1000,e -> {
+            try {
+                player.getOutputStream().writeUTF("Fresh");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        timer.start();
         readyButton.addActionListener(e -> {
             if(!player.isReady) {
                 player.isReady = true;

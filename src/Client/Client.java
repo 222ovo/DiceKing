@@ -23,7 +23,7 @@ public class Client {
                     }
                     else if(msg.equals("start"))
                     {
-                        System.out.println("start");
+                        System.out.println("游戏开始");
                         player.setGameState(GameState.RUNNING);
                         player.getGameWindow().initGame();
                     }

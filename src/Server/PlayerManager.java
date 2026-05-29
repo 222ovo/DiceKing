@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PlayerManager {
     public static PlayerManager Instance = new PlayerManager();
     private ArrayList<ServerPlayer> readyPlayers = new ArrayList<>();//已经准备了的玩家
+    private boolean isRunning = false;  //游戏已经开始
 
     public void addReady(ServerPlayer player)
     {
@@ -27,7 +28,7 @@ public class PlayerManager {
     }
     public boolean ready()
     {
-        if( readyPlayers.size() >= 2 ) //如果至少有两个玩家加入游戏，且全部准备
+        if( Server.players.size() >= 2 ) //如果至少有两个玩家加入游戏，且全部准备
         {
             System.out.println("玩家数量足够可以开始游戏");
             if(readyPlayers.size() == Server.players.size()) {

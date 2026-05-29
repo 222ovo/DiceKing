@@ -15,8 +15,10 @@ public class ServerPlayer{
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;
+    private int id;
 
-    public ServerPlayer(Socket socket) {
+    public ServerPlayer(Socket socket,int id) {
+        this.id = id;
         this.socket = socket;
         try {
             in = new DataInputStream(socket.getInputStream());
@@ -90,5 +92,13 @@ public class ServerPlayer{
     public Socket getSocket()
     {
         return socket;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
