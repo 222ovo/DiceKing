@@ -145,8 +145,8 @@ public class GameWindow extends JPanel{
         drawPlayers(g);
         //画金币
         drawGold(g);
-        //画房产本
-        drawBuildingBook(g);
+//        //画房产本
+//        drawBuildingBook(g);
         //画地图
         drawMap(g);
     }
@@ -261,57 +261,57 @@ public class GameWindow extends JPanel{
         }
     }
 
-    public void drawBuildingBook(Graphics g)
-    {
-        Font font = new Font("微软雅黑", Font.PLAIN, 24);
-        g.setFont(font);
-        for(int i = 0 ; i < Client.playerNum;i++)
-        {
-            switch(i) {
-                case 0:
-                {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(160,420,40,60);
-                    g.setColor(Color.GRAY);
-                    g.drawString("地",167,440);
-                    g.drawString("产",167,475);
-                }
-                break;
-                case 1: {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(890,20,40,60);
-                    g.setColor(Color.GRAY);
-                    g.drawString("地",897,40);
-                    g.drawString("产",897,75);
-                }
-                break;
-                case 2: {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(1650,420,40,60);
-                    g.setColor(Color.GRAY);
-                    g.drawString("地",1657,440);
-                    g.drawString("产",1657,475);
-                }
-                break;
-                case 3: {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(1170,840,40,60);
-                    g.setColor(Color.GRAY);
-                    g.drawString("地",1177,840);
-                    g.drawString("产",1177,895);
-                }
-                break;
-                case 4: {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(270,420,40,60);
-                    g.setColor(Color.GRAY);
-                    g.drawString("地",277,440);
-                    g.drawString("产",277,475);;
-                }
-                break;
-            }
-        }
-    }
+//    public void drawBuildingBook(Graphics g)
+//    {
+//        Font font = new Font("微软雅黑", Font.PLAIN, 24);
+//        g.setFont(font);
+//        for(int i = 0 ; i < Client.playerNum;i++)
+//        {
+//            switch(i) {
+//                case 0:
+//                {
+//                    g.setColor(Color.ORANGE);
+//                    g.fillRect(160,420,40,60);
+//                    g.setColor(Color.GRAY);
+//                    g.drawString("地",167,440);
+//                    g.drawString("产",167,475);
+//                }
+//                break;
+//                case 1: {
+//                    g.setColor(Color.ORANGE);
+//                    g.fillRect(890,20,40,60);
+//                    g.setColor(Color.GRAY);
+//                    g.drawString("地",897,40);
+//                    g.drawString("产",897,75);
+//                }
+//                break;
+//                case 2: {
+//                    g.setColor(Color.ORANGE);
+//                    g.fillRect(1650,420,40,60);
+//                    g.setColor(Color.GRAY);
+//                    g.drawString("地",1657,440);
+//                    g.drawString("产",1657,475);
+//                }
+//                break;
+//                case 3: {
+//                    g.setColor(Color.ORANGE);
+//                    g.fillRect(1170,840,40,60);
+//                    g.setColor(Color.GRAY);
+//                    g.drawString("地",1177,840);
+//                    g.drawString("产",1177,895);
+//                }
+//                break;
+//                case 4: {
+//                    g.setColor(Color.ORANGE);
+//                    g.fillRect(270,420,40,60);
+//                    g.setColor(Color.GRAY);
+//                    g.drawString("地",277,440);
+//                    g.drawString("产",277,475);;
+//                }
+//                break;
+//            }
+//        }
+//    }
 
     public void initGame()
     {
