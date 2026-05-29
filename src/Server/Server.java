@@ -56,6 +56,20 @@ public class Server {
     }
 
     /**
+     *
+     * @title: 给所有除id玩家以外的玩家发消息
+     * @param s 发送的消息
+     * @param id 玩家id
+     */
+    public static void sendMsgForAll(String s,int id)
+    {
+        for(ServerPlayer serverPlayer : players)
+        {
+            if(serverPlayer.getId() != id)
+                serverPlayer.sendMsg(s);
+        }
+    }
+    /**
      * @description: 给编号为id的玩家发送消息
      * @param id 玩家的编号
      * @param s 发送的消息

@@ -356,8 +356,6 @@ public class GameWindow extends JPanel{
 
     public void rollDice()
     {
-//        player.Move(1);
-//        repaint();
         int[] timer = {0};
         int animationDuration = 12;
         int[] points = {0};
@@ -374,6 +372,7 @@ public class GameWindow extends JPanel{
                     case 6 -> diceButton.setIcon(dice6);
                 }
                 ((Timer) e.getSource()).stop();
+                player.Move(points[0]);
                 return;
             }
             switch (timer[0] % 4) {
@@ -386,8 +385,6 @@ public class GameWindow extends JPanel{
         });
 
         swingTimer.start();
-
-//        player.Move(points[0]);
     }
 
     public void drawPlayersOnMap(Graphics g)
