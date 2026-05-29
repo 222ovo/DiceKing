@@ -10,6 +10,7 @@ import static java.lang.Thread.sleep;
 
 public class GameWindow extends JPanel{
 
+    public int i = 1;
     Player player;//当前客户端玩家
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
@@ -22,6 +23,14 @@ public class GameWindow extends JPanel{
     JButton readyButton = new JButton(ready);
     //取消准备按钮图
     ImageIcon unReady = new ImageIcon("unready.png");
+    //骰子的图片
+    ImageIcon dice1 = new ImageIcon("Dice1.png");
+    ImageIcon dice2 = new ImageIcon("Dice2.png");
+    ImageIcon dice3 = new ImageIcon("Dice3.png");
+    ImageIcon dice4 = new ImageIcon("Dice4.png");
+    ImageIcon dice5 = new ImageIcon("Dice5.png");
+    ImageIcon dice6 = new ImageIcon("Dice6.png");
+    JButton diceButton = new JButton(dice1);
 //    //窗口位置
 //    int x;
 //    int y;
@@ -58,6 +67,12 @@ public class GameWindow extends JPanel{
         readyButton.setBounds(1920 / 2 - ready.getIconWidth() - 40, 1080 / 2 + ready.getIconHeight(), ready.getIconWidth()-1, ready.getIconHeight());
         readyButton.setOpaque(false);
         mainFrame.getLayeredPane().add(readyButton);
+
+        diceButton.setContentAreaFilled(false);
+        diceButton.setBorder(null);
+        diceButton.setBounds(1920 / 2 - diceButton.getIcon().getIconWidth() - 40, 1080 / 2 - diceButton.getIcon().getIconHeight() + 80, diceButton.getIcon().getIconWidth()-1,diceButton.getIcon().getIconHeight());
+        diceButton.setOpaque(false);
+        mainFrame.getLayeredPane().add(diceButton);
 
         readyButton.addActionListener(e -> {
             if(!player.isReady) {
@@ -125,9 +140,36 @@ public class GameWindow extends JPanel{
                 }
             }
         });
-//        (new Timer(16, (e) -> {
-//            this.repaint();
-//        })).start();
+        (new Timer(100, (e) -> {
+            i = (i+1) % 6;
+            switch (i)
+            {
+                case 0:
+                    diceButton.setIcon(new ImageIcon("Dice1.png"));
+                    System.out.println(i);
+                    break;
+                case 1:
+                    diceButton.setIcon(new ImageIcon("Dice2.png"));
+                    System.out.println(i);
+                    break;
+                case 2:
+                    diceButton.setIcon(new ImageIcon("Dice3.png"));
+                    System.out.println(i);
+                    break;
+                case 3:
+                    diceButton.setIcon(new ImageIcon("Dice4.png"));
+                    System.out.println(i);
+                    break;
+                case 4:
+                    diceButton.setIcon(new ImageIcon("Dice5.png"));
+                    System.out.println(i);
+                    break;
+                case 5:
+                    diceButton.setIcon(new ImageIcon("Dice6.png"));
+                    System.out.println(i);
+                    break;
+            }
+        })).start();
     }
 
     public void setPlayer(Player player){
