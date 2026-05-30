@@ -11,12 +11,28 @@ public class MapLoader {
     //第一次游戏初始化地图
     public static void initialMap()
     {
-        fateList.add(player -> {});
-        fateList.add(player -> {});
-        fateList.add(player -> {});
-        fateList.add(player -> {});
-        fateList.add(player -> {});
-        fateList.add(player -> {});
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + 500);
+            player.getGameWindow().setBroadText("你发现了新的食谱,获得利润500");});
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + -200);
+            player.getGameWindow().setBroadText("在尝菜时食物中毒,花费200元治疗费");
+        });
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + 300);
+            player.getGameWindow().setBroadText("在厨神大赛获得300元奖励");});
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + -100);
+            player.getGameWindow().setBroadText("遇到吃霸王餐的顾客,损失100元");
+        });
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + -50);
+            player.getGameWindow().setBroadText("买到了生瓜蛋子,损失50元");
+        });
+        fateList.add(player -> {
+            player.sendMsg("UpdatePlayerGold" + 800);
+            player.getGameWindow().setBroadText("一位顾客在你的店拿出了百万英镑,名气大涨，获得800元");
+        });
         fateList.add(player -> {});
         fateList.add(player -> {});
         EventGrid grid1 = new EventGrid(new GridPos(300,200),"起点",player -> {
@@ -24,7 +40,7 @@ public class MapLoader {
         map.put(grid1.getGridPos(),grid1);
         BuildingGrid grid2 = new BuildingGrid(new GridPos(400,200),new Building("火锅街",1500,200));
         map.put(grid2.getGridPos(),grid2);
-        BuildingGrid grid3 = new BuildingGrid( new GridPos(500,200),new Building("汉堡市",1000,150));
+        BuildingGrid grid3 = new BuildingGrid(new GridPos(500,200),new Building("汉堡市",1000,150));
         map.put(grid3.getGridPos(),grid3);
         BuildingGrid grid4 = new BuildingGrid(new GridPos(600,200),new Building("烧烤城",1800,250));
         map.put(grid4.getGridPos(),grid4);
