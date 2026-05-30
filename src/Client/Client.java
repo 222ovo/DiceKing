@@ -39,6 +39,7 @@ public class Client {
                     else if(msg.equals("YourRound"))
                     {
                         System.out.println("到你的回合了");
+                        player.isRound = true;
                     }
                     else if(msg.startsWith("UpdatePlayerPos"))
                     {

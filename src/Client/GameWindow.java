@@ -143,6 +143,8 @@ public class GameWindow extends JPanel{
         overButton.addActionListener(e -> {
             overButton.setVisible(false);
             buyButton.setVisible(false);
+            player.sendMsg("Over");
+            player.isRound = false;
         });
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -162,7 +164,8 @@ public class GameWindow extends JPanel{
         diceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rollDice();
+                if(player.isRound)
+                    rollDice();
             }
         });
         addMouseListener(new MouseAdapter(){

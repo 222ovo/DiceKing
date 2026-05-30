@@ -38,6 +38,7 @@ public class GameRound {
                 }
                 if(msg.equals("Over"))
                 {
+                    System.out.println("玩家" + id + "回合结束");
                     break;
                 }
             }
