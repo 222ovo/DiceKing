@@ -141,6 +141,12 @@ public class GameWindow extends JPanel{
 
         buyButton.addActionListener(e -> {
             Building building = ((BuildingGrid)grid).getBuilding();
+            if(Player.playerDataList.get(player.getId()).getGold() < building.getPrice())
+            {
+                System.out.println("你的金币不足以购买" + building.getName());
+                setBroadText("你的金币不足以购买" + building.getName());
+                return;
+            }
             building.setId(player.getId());
             player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
             setBroadText("你购买了" + building.getName());
