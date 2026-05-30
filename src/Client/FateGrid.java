@@ -12,7 +12,7 @@ public class FateGrid extends Grid implements Serializable {
 
 
     @Override
-    public void stepEvent() {
+    public void stepEvent(Player player) {
 
     }
 

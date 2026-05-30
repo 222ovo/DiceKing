@@ -9,7 +9,7 @@ public class Dice {
     {
         Random r = new Random();
         points = r.nextInt(1,7);
-        player.sendMsg("RollDice" + points);
+//        player.sendMsg("RollDice" + points);
         return points;
     }
 }

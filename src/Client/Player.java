@@ -15,7 +15,12 @@ enum GameState{
     RUNNING,
     OVER
 }
-
+enum MoveDir{
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT
+}
 public class Player{
     public static ArrayList<PlayerData> playerDataList = new ArrayList<>();    //存储所有玩家数据的列表
     private DataInputStream in;
@@ -25,6 +30,7 @@ public class Player{
     private int id = -1;     //每个玩家对应一个编号，对应玩家数组的序号
     private GameState gameState = GameState.BEFORE_START;   //游戏状态
     private GameWindow gameWindow;
+    private MoveDir moveDir = MoveDir.RIGHT;
     public Player()
     {
         try {
@@ -72,10 +78,44 @@ public class Player{
     public void Move(int points)
     {
         PlayerData data = playerDataList.get(id);
-        data.x += Setting.GRID_WIDTH * points;
+
+        System.out.println("你移动了" + points + "格");
+        sendMsg("Move" + points);
+        while(points > 0) {
+            switch (moveDir) {
+                case UP:
+                {
+                    data.y -= Setting.GRID_HEIGHT;
+                    if(data.y <= 300)
+                        moveDir = MoveDir.RIGHT;
+                }
+                break;
+                case RIGHT:
+                {
+                    data.x += Setting.GRID_WIDTH;
+                    if(data.x >= 1300)
+                        moveDir = MoveDir.DOWN;
+                }
+                break;
+                case DOWN:
+                {
+                    data.y += Setting.GRID_HEIGHT;
+                    if(data.y >= 700)
+                        moveDir = MoveDir.LEFT;
+                }
+                break;
+                case LEFT:
+                {
+                    data.x -= Setting.GRID_WIDTH;
+                    if(data.x <= 400)
+                        moveDir = MoveDir.UP;
+                }
+                break;
+            }
+            points--;
+        }
         GridPos gridPos = new GridPos(data.x, data.y);
         System.out.println(MapLoader.map.get(gridPos));
-        System.out.println("你移动了" + points + "格");
         gameWindow.repaint();
     }
     public void sendMsg(String s)

@@ -12,7 +12,7 @@ public class EventGrid extends Grid implements Serializable {
     }
     //事件格子
     @Override
-    public void stepEvent() {
+    public void stepEvent(Player player) {
 
     }
 

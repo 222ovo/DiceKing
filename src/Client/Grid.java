@@ -17,7 +17,7 @@ public abstract class Grid implements Serializable {
         this.y = GridPos.changeToWorldPos(gridPos.y);
     }
     //踩中格子的效果
-    public abstract void stepEvent();
+    public abstract void stepEvent(Player player);
 
     public void draw(Graphics g)
     {

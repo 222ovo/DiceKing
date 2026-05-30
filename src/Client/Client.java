@@ -38,10 +38,10 @@ public class Client {
                     {
                         System.out.println("到你的回合了");
                     }
-                    else if(msg.startsWith("RollDice"))
+                    else if(msg.startsWith("Move"))
                     {
-                        String playerID = msg.substring("RollDice".length(),"RollDice".length() + 1);
-                        String points = msg.substring("RollDice".length() + 1).trim();
+                        String playerID = msg.substring("Move".length(),"Move".length() + 1);
+                        String points = msg.substring("Move".length() + 1).trim();
                         Player.playerDataList.get(Integer.parseInt(playerID)).x += Integer.parseInt(points)*Setting.GRID_WIDTH;
                         player.getGameWindow().repaint();
                     }

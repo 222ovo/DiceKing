@@ -13,7 +13,7 @@ public class BuildingGrid extends Grid implements Serializable {
         color = Setting.BUILDING_GRID_COLOR;
     }
     //普通格子，空实现
-    public void stepEvent() {}
+    public void stepEvent(Player player) {}
 
     @Override
     public void draw(Graphics g)

@@ -15,8 +15,8 @@ public class MoveGrid extends Grid implements Serializable {
     }
     //玩家按照移动数移动
     @Override
-    public void stepEvent() {
-
+    public void stepEvent(Player player) {
+        player.Move(move);
     }
 
     @Override
