@@ -2,6 +2,8 @@ package Client;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class FateGrid extends Grid implements Serializable {
     public FateGrid(GridPos gridPos)
@@ -13,7 +15,10 @@ public class FateGrid extends Grid implements Serializable {
 
     @Override
     public void stepEvent(Player player) {
-
+        Random r = new Random();
+        int n = r.nextInt(0,MapLoader.fateList.size());
+        fateInterface fate = MapLoader.fateList.get(n);
+        fate.fate(player);
     }
 
     @Override

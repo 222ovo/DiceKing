@@ -5,11 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapLoader {
+    public static final ArrayList<fateInterface> fateList = new ArrayList<>();
     public static final String MAP_DATA = "map.dat";
     public static final Map<GridPos,Grid> map = new HashMap<>();    //将格子以网格坐标存储
     //第一次游戏初始化地图
     public static void initialMap()
     {
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
+        fateList.add(player -> {});
         EventGrid grid1 = new EventGrid(new GridPos(300,200),"起点",player -> {
         });
         map.put(grid1.getGridPos(),grid1);
