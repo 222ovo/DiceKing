@@ -22,12 +22,12 @@ public class GameWindow extends JPanel{
     JLabel bg = new JLabel(back);
     //准备按钮图
     ImageIcon ready = new ImageIcon("ready.png");
-    JButton readyButton = new JButton(ready);
+    private JButton readyButton = new JButton(ready);
     //取消准备按钮图
     ImageIcon unReady = new ImageIcon("unready.png");
     //购买按钮图
     ImageIcon buy = new ImageIcon("Buy.png");
-    JButton buyButton = new JButton(buy);
+    private JButton buyButton = new JButton(buy);
     //结束按钮图
     ImageIcon over = new ImageIcon("Over.png");
     JButton overButton = new JButton(over);
@@ -136,6 +136,14 @@ public class GameWindow extends JPanel{
             }
         });
 
+        buyButton.addActionListener(e -> {
+
+        });
+
+        overButton.addActionListener(e -> {
+            overButton.setVisible(false);
+            buyButton.setVisible(false);
+        });
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -397,9 +405,9 @@ public class GameWindow extends JPanel{
                     case 6 -> diceButton.setIcon(dice6);
                 }
                 ((Timer) e.getSource()).stop();
-                player.Move(points[0]);
-                System.out.println("1");
                 isDicing = false;
+                player.Move(points[0]);
+                overButton.setVisible(true);
                 return;
             }
             switch (timer[0] % 4) {
@@ -425,5 +433,15 @@ public class GameWindow extends JPanel{
                 g.fillRect(playerData.x,playerData.y,Setting.PLAYER_WIDTH,Setting.PLAYER_HEIGHT);
             }
         }
+    }
+
+    public JButton getBuyButton()
+    {
+        return buyButton;
+    }
+
+    public JButton getOverButton()
+    {
+        return overButton;
     }
 }
