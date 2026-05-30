@@ -25,6 +25,14 @@ public class GameWindow extends JPanel{
     JButton readyButton = new JButton(ready);
     //取消准备按钮图
     ImageIcon unReady = new ImageIcon("unready.png");
+    //购买按钮图
+    ImageIcon buy = new ImageIcon("Buy.png");
+    JButton buyButton = new JButton(buy);
+    //结束按钮图
+    ImageIcon over = new ImageIcon("Over.png");
+    JButton overButton = new JButton(over);
+    //广播文字框
+    ImageIcon broadCast = new ImageIcon("BroadcastField.png");
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Dice1.png");
     ImageIcon dice2 = new ImageIcon("Dice2.png");
@@ -80,6 +88,20 @@ public class GameWindow extends JPanel{
         diceButton.setBounds(1920 / 2 - diceButton.getIcon().getIconWidth() - 40, 1080 / 2 - diceButton.getIcon().getIconHeight() + 80, diceButton.getIcon().getIconWidth()-1,diceButton.getIcon().getIconHeight());
         diceButton.setOpaque(false);
         mainFrame.getLayeredPane().add(diceButton);
+
+        buyButton.setContentAreaFilled(false);
+        buyButton.setBorder(null);
+        buyButton.setBounds(1920 / 2 - 2 * buyButton.getIcon().getIconWidth() - 120, 1080 / 2  + 70, buyButton.getIcon().getIconWidth()-1,buyButton.getIcon().getIconHeight());
+        buyButton.setOpaque(false);
+        buyButton.setVisible(false);
+        mainFrame.getLayeredPane().add(buyButton);
+
+        overButton.setContentAreaFilled(false);
+        overButton.setBorder(null);
+        overButton.setBounds(1920 / 2 + overButton.getIcon().getIconWidth()/2 - 40, 1080 / 2  + 70, overButton.getIcon().getIconWidth()-1,overButton.getIcon().getIconHeight());
+        overButton.setOpaque(false);
+        overButton.setVisible(false);
+        mainFrame.getLayeredPane().add(overButton);
 
         //定期给服务端发送消息，避免线程阻塞
         Timer timer = new Timer(1000,e -> {
