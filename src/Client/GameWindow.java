@@ -33,6 +33,8 @@ public class GameWindow extends JPanel{
     JButton overButton = new JButton(over);
     //广播文字框
     ImageIcon broadCast = new ImageIcon("BroadcastField.png");
+    JLabel broadCastField = new JLabel(broadCast);
+    String broadText;
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Dice1.png");
     ImageIcon dice2 = new ImageIcon("Dice2.png");
@@ -102,6 +104,12 @@ public class GameWindow extends JPanel{
         overButton.setOpaque(false);
         overButton.setVisible(false);
         mainFrame.getLayeredPane().add(overButton);
+
+        broadCastField.setBorder(null);
+        broadCastField.setBounds(1920 / 2 - broadCastField.getIcon().getIconWidth() / 2 - 105, 1080 / 4  + 80, broadCastField.getIcon().getIconWidth()-1,broadCastField.getIcon().getIconHeight());
+        broadCastField.setOpaque(false);
+        broadCastField.setVisible(true);
+        mainFrame.getLayeredPane().add(broadCastField);
 
         //定期给服务端发送消息，避免线程阻塞
         Timer timer = new Timer(1000,e -> {
@@ -213,8 +221,8 @@ public class GameWindow extends JPanel{
         drawPlayers(g);
         //画金币
         drawGold(g);
-//        //画房产本
-//        drawBuildingBook(g);
+        //画房产本
+        drawBuildingBook(g);
         //画地图
         drawMap(g);
         drawPlayersOnMap(g);
