@@ -36,7 +36,17 @@ public class GameRound {
                     System.out.println("玩家" + id + "坐标为" + x + "," + y);
                     Server.sendMsgForAll("UpdatePlayerPos" + id + "|" + x + "|" + y,id);//给除了玩家id以外的玩家发消息
                 }
-                if(msg.equals("Over"))
+                else if(msg.startsWith("Buy"))
+                {
+                    String buildingInfo = msg.substring("Buy".length());
+                    String[] parts = buildingInfo.split("\\|");
+                    String name = parts[0];
+                    int price = Integer.parseInt(parts[1]);
+
+                    System.out.println("玩家" + id + "花费" + price + "购买了" + name);
+                    Server.sendMsgForAll("Buy" + id + "|" + name + "|" + price);
+                }
+                else if(msg.equals("Over"))
                 {
                     System.out.println("玩家" + id + "回合结束");
                     break;

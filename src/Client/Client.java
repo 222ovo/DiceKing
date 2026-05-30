@@ -50,10 +50,37 @@ public class Client {
                         int x = Integer.parseInt(parts[1]);
                         int y = Integer.parseInt(parts[2]);
 
-                        player.getGameWindow().setBroadText("玩家" + id + "移动到了" + x/100 + "," + y/100);
                         Player.playerDataList.get(id).x = x;
                         Player.playerDataList.get(id).y = y;
-                        player.getGameWindow().repaint();
+                        player.getGameWindow().setBroadText("玩家" + id + "移动到了" + x/100 + "," + y/100);
+                    }
+                    else if(msg.startsWith("Buy"))
+                    {
+                        String buildingInfo = msg.substring("Buy".length());
+                        String[] parts = buildingInfo.split("\\|");
+                        String id = parts[0];
+                        String name = parts[1];
+                        int price = Integer.parseInt(parts[2]) * (-1);
+                        System.out.println("玩家" + id + "花费" + price + "购买了" + name);
+
+                        //处理逻辑
+                        PlayerData.changePlayerGold(id,price);
+
+                        for(Grid grid : MapLoader.map.values())
+                        {
+                            if(grid instanceof BuildingGrid)
+                            {
+                                Building building = ((BuildingGrid)grid).getBuilding();
+                                if(building == null || building.getId() != -1) continue;
+
+                                if(building.getName().trim().equals(name))
+                                {
+                                    building.setId(Integer.parseInt(id));
+                                    System.out.println(building.getId());
+                                }
+                            }
+                        }
+                        player.getGameWindow().setBroadText("玩家" + id + "花费" + price + "购买了" + name);
                     }
                 }
             } catch (IOException e) {

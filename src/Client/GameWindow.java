@@ -141,10 +141,10 @@ public class GameWindow extends JPanel{
 
         buyButton.addActionListener(e -> {
             Building building = ((BuildingGrid)grid).getBuilding();
-            //TODO:测试
             building.setId(player.getId());
-            player.sendMsg("Buy" + building.getName());
+            player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
             setBroadText("你购买了" + building.getName());
+            buyButton.setVisible(false);
             repaint();
         });
 
