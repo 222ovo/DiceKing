@@ -35,7 +35,7 @@ public class Player{
     public Player()
     {
         try {
-            String ip = "127.0.0.1";
+            String ip = "192.168.12.63";
             InetSocketAddress socketAddress = new InetSocketAddress(ip,8888);
             socket.connect(socketAddress);
             System.out.println("连接成功");
@@ -86,8 +86,10 @@ public class Player{
                 switch (moveDir) {
                     case UP: {
                         data.y -= Setting.GRID_HEIGHT;
-                        if (data.y <= 300)
+                        if (data.y <= 300) {
                             moveDir = MoveDir.RIGHT;
+                            sendMsg("UpdatePlayerGold" + Setting.ROUND_BOUNDS);
+                        }
                     }
                     break;
                     case RIGHT: {
@@ -187,4 +189,8 @@ public class Player{
         return in;
     }
 
+    public void setMoveDir(MoveDir moveDir)
+    {
+        this.moveDir = moveDir;
+    }
 }

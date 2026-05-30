@@ -14,10 +14,16 @@ public class BuildingGrid extends Grid implements Serializable {
     }
     //普通格子，空实现
     public void stepEvent(Player player) {
+        if(building == null)
+        {
+            System.out.println("未找到建筑");
+            return;
+        }
         //如果当前土地的购买人不是自己
         if(building.getId() != -1 && building.getId() != player.getId()) {
             //付钱
-            player.sendMsg("Pay" + building.getRevenue());
+            //给玩家building的所有者付钱
+            player.sendMsg("Pay" + building.getRevenue() + "|" + building.getId());
             return;
         }
         player.getGameWindow().getBuyButton().setVisible(true);

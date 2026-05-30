@@ -48,4 +48,37 @@ public class PlayerData {
         PlayerData player = Player.playerDataList.get(Integer.parseInt(id));
         player.setGold(player.getGold() + goldNum);
     }
+
+    public static void setToZero(String playerId)
+    {
+        int id = Integer.parseInt(playerId);
+        switch(id)
+        {
+            case 0:
+                System.out.println("玩家0");
+                Player.playerDataList.get(id).x = Setting.PLAYER0_X;
+                Player.playerDataList.get(id).y = Setting.PLAYER0_Y;
+                break;
+            case 1:
+                System.out.println("玩家1");
+                Player.playerDataList.get(id).x = Setting.PLAYER1_X;
+                Player.playerDataList.get(id).y = Setting.PLAYER1_Y;
+                break;
+            case 2:
+                System.out.println("玩家2");
+                Player.playerDataList.get(id).x = Setting.PLAYER2_X;
+                Player.playerDataList.get(id).y = Setting.PLAYER2_Y;
+                break;
+            case 3:
+                System.out.println("玩家3");
+                Player.playerDataList.get(id).x = Setting.PLAYER3_X;
+                Player.playerDataList.get(id).y = Setting.PLAYER3_Y;
+                break;
+            case 4:
+                System.out.println("玩家4");
+                Player.playerDataList.get(id).x = Setting.PLAYER4_X;
+                Player.playerDataList.get(id).y = Setting.PLAYER4_Y;
+                break;
+        }
+    }
 }

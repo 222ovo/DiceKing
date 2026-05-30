@@ -3,17 +3,22 @@ package Client;
 import java.awt.*;
 import java.io.Serializable;
 
-public class EventGrid extends Grid implements Serializable {
+public class EventGrid extends Grid implements Serializable{
 
-    public EventGrid(GridPos gridPos)
+    private final eventInterface event;
+    private String eventInfo;   //事件描述
+    public EventGrid(GridPos gridPos,String eventInfo,eventInterface event)
     {
         super(gridPos);
         color = Setting.EVENT_GRID_COLOR;
+        this.eventInfo = eventInfo;
+        this.event = event;
     }
+
     //事件格子
     @Override
     public void stepEvent(Player player) {
-
+        event.event(player);
     }
 
     @Override
@@ -25,9 +30,9 @@ public class EventGrid extends Grid implements Serializable {
         g.fillRect(x,y,width,height);
         g.setColor(Color.BLACK);
         g.drawRect(x,y,width,height);
-        font = new Font("微软雅黑", Font.PLAIN, 40);
+        font = new Font("微软雅黑", Font.PLAIN, 18);
         g.setFont(font);
-        g.drawString("事件", x+10, y + 45);
-        g.drawString("?",x+38,y+80);
+        g.drawString(eventInfo, x+10, y + 45);
     }
+
 }

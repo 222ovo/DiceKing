@@ -16,7 +16,7 @@ public class ServerPlayer{
     private DataInputStream in;
     private DataOutputStream out;
     private int id;
-
+    public boolean isStay = false;
     public ServerPlayer(Socket socket,int id) {
         this.id = id;
         this.socket = socket;

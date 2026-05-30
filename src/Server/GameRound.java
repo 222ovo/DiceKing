@@ -21,11 +21,17 @@ public class GameRound {
         while(true)
         {
             id = (id+1)%players.size(); //当前玩家回合
-            players.get(id).sendMsg("YourRound");   //给玩家发信息
+            ServerPlayer player = players.get(id);
+            if(player.isStay)
+            {
+                player.isStay = false;
+                continue;
+            }
+            player.sendMsg("YourRound");   //给玩家发信息
 
             while(true) {
                 //掷骰子的人和发消息的人一定是玩家id
-                String msg = players.get(id).receiveMsg();
+                String msg = player.receiveMsg();
                 if (msg.startsWith("UpdatePlayerPos")) {
 
                     String playerPos = msg.substring("UpdatePlayerPos".length());
@@ -45,6 +51,34 @@ public class GameRound {
 
                     System.out.println("玩家" + id + "花费" + price + "购买了" + name);
                     Server.sendMsgForAll("Buy" + id + "|" + name + "|" + price);
+                }
+                else if(msg.startsWith("Pay"))
+                {
+                    msg = msg.substring("Pay".length());
+                    String[] parts = msg.split("\\|");
+                    int revenue = Integer.parseInt(parts[0]);
+                    String playerId = parts[1];
+
+                    System.out.println("玩家" + id + "支付给玩家" + playerId + ":" + revenue);
+                    //玩家id给玩家playerId revenue元
+                    Server.sendMsgForAll("Pay" + id + "|" + playerId + "|" + revenue);
+                }
+                else if(msg.startsWith("UpdatePlayerGold"))
+                {
+                    String bounds = msg.substring("UpdatePlayerGold".length());
+
+                    System.out.println("玩家" + id + "获得" + bounds);
+                    Server.sendMsgForAll("UpdatePlayerGold" + id + "|" + bounds);
+                }
+                else if(msg.equals("Stay"))
+                {
+                    player.isStay = true;
+                    System.out.println("滞留一回合");
+                }
+                else if(msg.equals("BackToZero"))
+                {
+                    Server.sendMsgForAll("BackToZero" + id);
+                    System.out.println("玩家" + id + "回到原点");
                 }
                 else if(msg.equals("Over"))
                 {

@@ -48,4 +48,8 @@ public class Setting {
     public static final int PLAYER4_X = 355;
     public static final int PLAYER4_Y = 240;
     public static final Color PLAYER4_COLOR = Color.GRAY;
+    //每回合玩家获得的金币
+    public static final int ROUND_BOUNDS = 1000;
+    //初始移动方向
+    public static final MoveDir INITIAL_DIR = MoveDir.RIGHT;
 }

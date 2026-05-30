@@ -10,7 +10,8 @@ public class MapLoader {
     //第一次游戏初始化地图
     public static void initialMap()
     {
-        BuildingGrid grid1 = new BuildingGrid(new GridPos(300,200),null);
+        EventGrid grid1 = new EventGrid(new GridPos(300,200),"起点",player -> {
+        });
         map.put(grid1.getGridPos(),grid1);
         BuildingGrid grid2 = new BuildingGrid(new GridPos(400,200),new Building("火锅街",1500,200));
         map.put(grid2.getGridPos(),grid2);
@@ -30,7 +31,10 @@ public class MapLoader {
         map.put(grid9.getGridPos(),grid9);
         BuildingGrid grid10 = new BuildingGrid(new GridPos(1200,200),new Building("超级大饭店",2000,350));
         map.put(grid10.getGridPos(),grid10);
-        EventGrid grid11 = new EventGrid(new GridPos(1300,200));
+        EventGrid grid11 = new EventGrid(new GridPos(1300,200),"滞留一回合",player -> {
+            player.sendMsg("Stay");
+            player.getGameWindow().setBroadText("滞留一回合");
+        });
         map.put(grid11.getGridPos(),grid11);
         BuildingGrid grid12 = new BuildingGrid(new GridPos(1300,300),new Building("良子焖子",900,130));
         map.put(grid12.getGridPos(),grid12);
@@ -50,7 +54,9 @@ public class MapLoader {
         map.put(grid19.getGridPos(),grid19);
         BuildingGrid grid20 = new BuildingGrid(new GridPos(900,700),new Building("炉石酒馆",2200,370));
         map.put(grid20.getGridPos(),grid20);
-        EventGrid grid21 = new EventGrid(new GridPos(800,700));
+        EventGrid grid21 = new EventGrid(new GridPos(800,700),"回到原点",player -> {
+            player.sendMsg("BackToZero");
+        });
         map.put(grid21.getGridPos(),grid21);
         BuildingGrid grid22 = new BuildingGrid(new GridPos(700,700),new Building("夜雀食堂",1600,210));
         map.put(grid22.getGridPos(),grid22);

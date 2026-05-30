@@ -31,8 +31,10 @@ public class Client {
                     }
                     else if(msg.startsWith("UpdatePlayerGold"))
                     {
-                        String playerID = msg.substring("UpdatePlayerGold".length(),"UpdatePlayerGold".length() + 1);
-                        String goldNum = msg.substring("UpdatePlayerGold".length() + 1).trim();
+                        msg = msg.substring("UpdatePlayerGold".length());
+                        String[] parts = msg.split("\\|");
+                        String playerID = parts[0];
+                        String goldNum = parts[1];
                         player.getGameWindow().setBroadText("玩家" + playerID + "金币变化" + goldNum);
                         PlayerData.changePlayerGold(playerID,Integer.parseInt(goldNum));
                     }
@@ -81,6 +83,31 @@ public class Client {
                             }
                         }
                         player.getGameWindow().setBroadText("玩家" + id + "花费" + price + "购买了" + name);
+                    }
+                    else if(msg.startsWith("Pay"))
+                    {
+                        msg = msg.substring("Pay".length());
+                        String[] parts = msg.split("\\|");
+                        String id1 = parts[0];
+                        String id2 = parts[1];;
+                        int revenue = Integer.parseInt(parts[2]);
+
+                        System.out.println("玩家" + id1 + "支付给玩家" + id2 + ":" + revenue);
+                        //玩家id给玩家playerId revenue元
+                        PlayerData.changePlayerGold(id1,revenue*(-1));
+                        PlayerData.changePlayerGold(id2,revenue);
+                        player.getGameWindow().setBroadText("玩家" + id1 + "支付给玩家" + id2 + ":" + revenue);
+                    }
+                    else if(msg.startsWith("BackToZero"))
+                    {
+                        String playerId = msg.substring("BackToZero".length());
+                        System.out.println("不幸的玩家" + playerId + "回到了原点");
+                        PlayerData.setToZero(playerId);
+                        if(Integer.parseInt(playerId) == player.getId())
+                        {
+                            player.setMoveDir(Setting.INITIAL_DIR);
+                        }
+                        player.getGameWindow().setBroadText("不幸的玩家" + playerId + "回到了原点");
                     }
                 }
             } catch (IOException e) {

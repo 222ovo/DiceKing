@@ -3,6 +3,7 @@ package Server;
 import Client.Player;
 import Client.Setting;
 
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Server {
     public static final int MAX_PLAYER = 5;
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(8888);
+        ServerSocket server = new ServerSocket(8888, 50, InetAddress.getByName("192.168.12.63"));
         System.out.println("服务器已启动!");
         PlayerManager playerManager = new PlayerManager();
         while(true)
