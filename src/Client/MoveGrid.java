@@ -28,18 +28,10 @@ public class MoveGrid extends Grid implements Serializable {
         g.fillRect(x,y,width,height);
         g.setColor(Color.BLACK);
         g.drawRect(x,y,width,height);
-        if(move > 0) {
-            font = new Font("微软雅黑", Font.PLAIN, 40);
-            g.setFont(font);
-            g.drawString("前进", x+10, y + 45);
-            g.drawString(String.valueOf(move),x+38,y+80);
-        }
-        else if(move < 0)
-        {
-            font = new Font("微软雅黑", Font.PLAIN, 40);
-            g.setFont(font);
-            g.drawString("后退", x+10, y + 45);
-            g.drawString(String.valueOf(move),x+30,y+80);
-        }
+
+        font = new Font("微软雅黑", Font.PLAIN, 40);
+        g.setFont(font);
+        g.drawString("前进", x+10, y + 45);
+        g.drawString(String.valueOf(move),x+38,y+80);
     }
 }

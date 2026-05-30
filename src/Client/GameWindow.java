@@ -13,6 +13,7 @@ public class GameWindow extends JPanel{
     Player player;
     //骰子
     Dice dice = new Dice();
+    public boolean isDicing = false;
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
@@ -356,6 +357,8 @@ public class GameWindow extends JPanel{
 
     public void rollDice()
     {
+        if(isDicing) return;
+        isDicing = true;
         int[] timer = {0};
         int animationDuration = 12;
         int[] points = {0};
@@ -373,6 +376,8 @@ public class GameWindow extends JPanel{
                 }
                 ((Timer) e.getSource()).stop();
                 player.Move(points[0]);
+                System.out.println("1");
+                isDicing = false;
                 return;
             }
             switch (timer[0] % 4) {

@@ -44,7 +44,7 @@ public class MapLoader {
         map.put(grid16.getGridPos(),grid16);
         BuildingGrid grid17 = new BuildingGrid(new GridPos(1200,700),new Building("良子大锅菜",1400,190));
         map.put(grid17.getGridPos(),grid17);
-        MoveGrid grid18 = new MoveGrid(new GridPos(1100,700),-2);
+        MoveGrid grid18 = new MoveGrid(new GridPos(1100,700),3);
         map.put(grid18.getGridPos(),grid18);
         BuildingGrid grid19 = new BuildingGrid(new GridPos(1000,700),new Building("良子品铺",1900,260));
         map.put(grid19.getGridPos(),grid19);
@@ -64,7 +64,7 @@ public class MapLoader {
         map.put(grid26.getGridPos(),grid26);
         BuildingGrid grid27 = new BuildingGrid(new GridPos(300,600),new Building("巧乐兹批发厂",1700,220));
         map.put(grid27.getGridPos(),grid27);
-        MoveGrid grid28 = new MoveGrid(new GridPos(300,500),-3);
+        MoveGrid grid28 = new MoveGrid(new GridPos(300,500),3);
         map.put(grid28.getGridPos(),grid28);
         BuildingGrid grid29 = new BuildingGrid(new GridPos(300,400),new Building("山姆超市",3000,500));
         map.put(grid29.getGridPos(),grid29);

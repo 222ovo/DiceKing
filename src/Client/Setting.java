@@ -33,19 +33,19 @@ public class Setting {
     public static final int PLAYER_WIDTH = 25;
     public static final int PLAYER_HEIGHT = 25;
     //玩家在格子的方位
-    public static final int PLAYER0_X = 300;
-    public static final int PLAYER0_Y = 200;
+    public static final int PLAYER0_X = 310;
+    public static final int PLAYER0_Y = 210;
     public static final Color PLAYER0_COLOR = Color.PINK;
-    public static final int PLAYER1_X = 330;
-    public static final int PLAYER1_Y = 200;
+    public static final int PLAYER1_X = 340;
+    public static final int PLAYER1_Y = 210;
     public static final Color PLAYER1_COLOR = Color.YELLOW;
-    public static final int PLAYER2_X = 360;
-    public static final int PLAYER2_Y = 200;
+    public static final int PLAYER2_X = 370;
+    public static final int PLAYER2_Y = 210;
     public static final Color PLAYER2_COLOR = Color.RED;
-    public static final int PLAYER3_X = 315;
-    public static final int PLAYER3_Y = 230;
+    public static final int PLAYER3_X = 325;
+    public static final int PLAYER3_Y = 240;
     public static final Color PLAYER3_COLOR = Color.ORANGE;
-    public static final int PLAYER4_X = 345;
-    public static final int PLAYER4_Y = 230;
+    public static final int PLAYER4_X = 355;
+    public static final int PLAYER4_Y = 240;
     public static final Color PLAYER4_COLOR = Color.GRAY;
 }

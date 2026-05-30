@@ -80,45 +80,52 @@ public class Player{
         PlayerData data = playerDataList.get(id);
 
         System.out.println("你移动了" + points + "格");
-        while(points > 0) {
-            switch (moveDir) {
-                case UP:
-                {
-                    data.y -= Setting.GRID_HEIGHT;
-                    if(data.y <= 300)
-                        moveDir = MoveDir.RIGHT;
+            while (points-- > 0) {
+                switch (moveDir) {
+                    case UP: {
+                        data.y -= Setting.GRID_HEIGHT;
+                        if (data.y <= 300)
+                            moveDir = MoveDir.RIGHT;
+                    }
+                    break;
+                    case RIGHT: {
+                        data.x += Setting.GRID_WIDTH;
+                        if (data.x >= 1300)
+                            moveDir = MoveDir.DOWN;
+                    }
+                    break;
+                    case DOWN: {
+                        data.y += Setting.GRID_HEIGHT;
+                        if (data.y >= 700)
+                            moveDir = MoveDir.LEFT;
+                    }
+                    break;
+                    case LEFT: {
+                        data.x -= Setting.GRID_WIDTH;
+                        if (data.x <= 400)
+                            moveDir = MoveDir.UP;
+                    }
+                    break;
                 }
-                break;
-                case RIGHT:
-                {
-                    data.x += Setting.GRID_WIDTH;
-                    if(data.x >= 1300)
-                        moveDir = MoveDir.DOWN;
-                }
-                break;
-                case DOWN:
-                {
-                    data.y += Setting.GRID_HEIGHT;
-                    if(data.y >= 700)
-                        moveDir = MoveDir.LEFT;
-                }
-                break;
-                case LEFT:
-                {
-                    data.x -= Setting.GRID_WIDTH;
-                    if(data.x <= 400)
-                        moveDir = MoveDir.UP;
-                }
-                break;
             }
-            points--;
-        }
+
         GridPos gridPos = new GridPos(data.x, data.y);
         System.out.println(MapLoader.map.get(gridPos));
         MapLoader.map.get(gridPos).stepEvent(this);
         sendMsg("UpdatePlayerPos" + data.x + "|" +data.y);
         gameWindow.repaint();
     }
+
+    private MoveDir getReverseDir(MoveDir dir) {
+        switch (dir) {
+            case UP:    return MoveDir.DOWN;
+            case DOWN:  return MoveDir.UP;
+            case LEFT:  return MoveDir.RIGHT;
+            case RIGHT: return MoveDir.LEFT;
+            default:    return dir;
+        }
+    }
+
     public void sendMsg(String s)
     {
         try {
