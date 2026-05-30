@@ -6,6 +6,7 @@ public class Building implements Serializable {
     private String name;    //房产的名字
     private int price;      //房产的价格
     private int revenue;    //其他玩家踩中后获得的收益
+    private int id = -1;    //所有者
 
     public Building(String name,int price,int revenue)
     {
@@ -37,5 +38,13 @@ public class Building implements Serializable {
 
     public void setRevenue(int revenue) {
         this.revenue = revenue;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

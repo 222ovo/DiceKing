@@ -3,6 +3,7 @@ package Client;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
@@ -14,6 +15,7 @@ public class GameWindow extends JPanel{
     //骰子
     Dice dice = new Dice();
     public boolean isDicing = false;
+    private Grid grid;  //玩家当前所在的格子
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
@@ -32,9 +34,9 @@ public class GameWindow extends JPanel{
     ImageIcon over = new ImageIcon("Over.png");
     JButton overButton = new JButton(over);
     //广播文字框
-    ImageIcon broadCast = new ImageIcon("BroadcastField.png");
-    JLabel broadCastField = new JLabel(broadCast);
-    String broadText;
+    Image broadcast = Toolkit.getDefaultToolkit()
+            .getImage(getClass().getResource("BroadcastField.png"));
+    private String broadText = "玩家获得了2000金币";
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Dice1.png");
     ImageIcon dice2 = new ImageIcon("Dice2.png");
@@ -56,7 +58,6 @@ public class GameWindow extends JPanel{
 //    int height;
     public GameWindow()
     {
-        MapLoader.initialMap();
         this.setBounds(0, 0,
                 back.getIconWidth(),
                 back.getIconHeight());
@@ -105,12 +106,6 @@ public class GameWindow extends JPanel{
         overButton.setVisible(false);
         mainFrame.getLayeredPane().add(overButton);
 
-        broadCastField.setBorder(null);
-        broadCastField.setBounds(1920 / 2 - broadCastField.getIcon().getIconWidth() / 2 - 105, 1080 / 4  + 80, broadCastField.getIcon().getIconWidth()-1,broadCastField.getIcon().getIconHeight());
-        broadCastField.setOpaque(false);
-        broadCastField.setVisible(true);
-        mainFrame.getLayeredPane().add(broadCastField);
-
         //定期给服务端发送消息，避免线程阻塞
         Timer timer = new Timer(1000,e -> {
             try {
@@ -145,7 +140,12 @@ public class GameWindow extends JPanel{
         });
 
         buyButton.addActionListener(e -> {
-
+            Building building = ((BuildingGrid)grid).getBuilding();
+            //TODO:测试
+            building.setId(player.getId());
+            player.sendMsg("Buy" + building.getName());
+            setBroadText("你购买了" + building.getName());
+            repaint();
         });
 
         overButton.addActionListener(e -> {
@@ -225,7 +225,12 @@ public class GameWindow extends JPanel{
         drawBuildingBook(g);
         //画地图
         drawMap(g);
+        //在地图上绘制玩家
         drawPlayersOnMap(g);
+        //绘制广播文字
+        drawBroadText(g);
+        //绘制地图上的建筑
+        drawBuilding(g);
     }
 
     //画地图
@@ -307,6 +312,14 @@ public class GameWindow extends JPanel{
         }
     }
 
+    public void drawBroadText(Graphics g)
+    {
+        g.drawImage(broadcast,495,340,this);
+        Font font = new Font("微软雅黑", Font.PLAIN, 24);
+        g.setFont(font);
+        g.setColor(Color.BLACK);
+        g.drawString(broadText,530, 368);
+    }
     public void drawGold(Graphics g)
     {
         g.setColor(Color.yellow);
@@ -446,6 +459,38 @@ public class GameWindow extends JPanel{
         }
     }
 
+    public void drawBuilding(Graphics g)
+    {
+        for(Grid grid : MapLoader.map.values())
+        {
+            if(grid instanceof BuildingGrid)
+            {
+                Building building = ((BuildingGrid)grid).getBuilding();
+                if(building == null || building.getId() == -1) continue;
+
+                switch(building.getId())
+                {
+                    case 0:
+                        g.setColor(Setting.PLAYER0_COLOR);
+                        break;
+                    case 1:
+                        g.setColor(Setting.PLAYER1_COLOR);
+                        break;
+                    case 2:
+                        g.setColor(Setting.PLAYER2_COLOR);
+                        break;
+                    case 3:
+                        g.setColor(Setting.PLAYER3_COLOR);
+                        break;
+                    case 4:
+                        g.setColor(Setting.PLAYER4_COLOR);
+                        break;
+                }
+                g.fillRect(grid.x, grid.y + Setting.GRID_HEIGHT-5,Setting.GRID_WIDTH,5);
+            }
+        }
+    }
+
     public JButton getBuyButton()
     {
         return buyButton;
@@ -454,5 +499,17 @@ public class GameWindow extends JPanel{
     public JButton getOverButton()
     {
         return overButton;
+    }
+
+    public void setBroadText(String s)
+    {
+        this.broadText = s;
+        repaint();
+    }
+
+    public void updateGrid(Grid grid)
+    {
+        this.grid = grid;
+        grid.stepEvent(player);
     }
 }

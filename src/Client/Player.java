@@ -68,6 +68,7 @@ public class Player{
         } catch (IOException e) {
             System.out.println("断开连接");
         }
+        MapLoader.initialMap();
         gameWindow = new GameWindow();
         gameWindow.setPlayer(this);
     }
@@ -112,7 +113,7 @@ public class Player{
 
         GridPos gridPos = new GridPos(data.x, data.y);
         System.out.println(MapLoader.map.get(gridPos));
-        MapLoader.map.get(gridPos).stepEvent(this);
+        gameWindow.updateGrid(MapLoader.map.get(gridPos));
         sendMsg("UpdatePlayerPos" + data.x + "|" +data.y);
         gameWindow.repaint();
     }

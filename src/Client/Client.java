@@ -19,13 +19,13 @@ public class Client {
                     if(msg.startsWith("UpdatePlayersNum")) {
                         String numStr = msg.substring("UpdatePlayersNum".length()).trim();
                         playerNum = Integer.parseInt(numStr);
-                        System.out.println("当前玩家数量:" + playerNum);
+                        player.getGameWindow().setBroadText("当前玩家数量:" + playerNum);
                         if(player.getId() == -1)
                             player.setID(playerNum - 1);
                     }
                     else if(msg.equals("start"))
                     {
-                        System.out.println("游戏开始");
+                        player.getGameWindow().setBroadText("游戏开始");
                         player.setGameState(GameState.RUNNING);
                         player.getGameWindow().initGame();
                     }
@@ -33,12 +33,13 @@ public class Client {
                     {
                         String playerID = msg.substring("UpdatePlayerGold".length(),"UpdatePlayerGold".length() + 1);
                         String goldNum = msg.substring("UpdatePlayerGold".length() + 1).trim();
-                        System.out.println("玩家" + playerID + "金币变化" + goldNum);
+                        player.getGameWindow().setBroadText("玩家" + playerID + "金币变化" + goldNum);
                         PlayerData.changePlayerGold(playerID,Integer.parseInt(goldNum));
                     }
                     else if(msg.equals("YourRound"))
                     {
                         System.out.println("到你的回合了");
+                        player.getGameWindow().setBroadText("到你的回合了");
                         player.isRound = true;
                     }
                     else if(msg.startsWith("UpdatePlayerPos"))
@@ -49,6 +50,7 @@ public class Client {
                         int x = Integer.parseInt(parts[1]);
                         int y = Integer.parseInt(parts[2]);
 
+                        player.getGameWindow().setBroadText("玩家" + id + "移动到了" + x/100 + "," + y/100);
                         Player.playerDataList.get(id).x = x;
                         Player.playerDataList.get(id).y = y;
                         player.getGameWindow().repaint();
