@@ -1,5 +1,7 @@
 package Client;
 
+import Server.Server;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -38,11 +40,16 @@ public class Client {
                     {
                         System.out.println("到你的回合了");
                     }
-                    else if(msg.startsWith("Move"))
+                    else if(msg.startsWith("UpdatePlayerPos"))
                     {
-                        String playerID = msg.substring("Move".length(),"Move".length() + 1);
-                        String points = msg.substring("Move".length() + 1).trim();
-                        Player.playerDataList.get(Integer.parseInt(playerID)).x += Integer.parseInt(points)*Setting.GRID_WIDTH;
+                        String playerPos = msg.substring("UpdatePlayerPos".length());
+                        String[] parts = playerPos.split("\\|");
+                        int id = Integer.parseInt(parts[0]);
+                        int x = Integer.parseInt(parts[1]);
+                        int y = Integer.parseInt(parts[2]);
+
+                        Player.playerDataList.get(id).x = x;
+                        Player.playerDataList.get(id).y = y;
                         player.getGameWindow().repaint();
                     }
                 }

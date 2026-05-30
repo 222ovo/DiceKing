@@ -80,7 +80,6 @@ public class Player{
         PlayerData data = playerDataList.get(id);
 
         System.out.println("你移动了" + points + "格");
-        sendMsg("Move" + points);
         while(points > 0) {
             switch (moveDir) {
                 case UP:
@@ -116,6 +115,8 @@ public class Player{
         }
         GridPos gridPos = new GridPos(data.x, data.y);
         System.out.println(MapLoader.map.get(gridPos));
+        MapLoader.map.get(gridPos).stepEvent(this);
+        sendMsg("UpdatePlayerPos" + data.x + "|" +data.y);
         gameWindow.repaint();
     }
     public void sendMsg(String s)

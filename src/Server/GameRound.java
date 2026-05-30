@@ -26,10 +26,15 @@ public class GameRound {
             while(true) {
                 //掷骰子的人和发消息的人一定是玩家id
                 String msg = players.get(id).receiveMsg();
-                if (msg.startsWith("Move")) {
-                    String points = msg.substring("Move".length());
-                    System.out.println("玩家" + id + "移动" + points);
-                    Server.sendMsgForAll("Move" + id + points,id);//给除了玩家id以外的玩家发消息
+                if (msg.startsWith("UpdatePlayerPos")) {
+
+                    String playerPos = msg.substring("UpdatePlayerPos".length());
+                    String[] parts = playerPos.split("\\|");
+                    int x = Integer.parseInt(parts[0]);
+                    int y = Integer.parseInt(parts[1]);
+
+                    System.out.println("玩家" + id + "坐标为" + x + "," + y);
+                    Server.sendMsgForAll("UpdatePlayerPos" + id + "|" + x + "|" + y,id);//给除了玩家id以外的玩家发消息
                 }
                 if(msg.equals("Over"))
                 {
