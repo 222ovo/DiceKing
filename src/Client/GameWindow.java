@@ -21,6 +21,7 @@ public class GameWindow extends JPanel{
     public int round;   //清算倒计时
     public int magnification = Setting.MAGIFICATION;    //基础倍率
     public int baseRent = Setting.BASE_RENT; //基础租金
+    private int currentPlayerID = -1;
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
@@ -42,7 +43,7 @@ public class GameWindow extends JPanel{
     Image broadcast = Toolkit.getDefaultToolkit()
             .getImage(getClass().getResource("BroadcastField.png"));
     private String broadText = "玩家获得了2000金币";
-    private Timer timer;
+    private final Timer timer;
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Dice1.png");
     ImageIcon dice2 = new ImageIcon("Dice2.png");
@@ -240,6 +241,8 @@ public class GameWindow extends JPanel{
         drawMap(g);
         //在地图上绘制玩家
         drawPlayersOnMap(g);
+        //绘制当前玩家的边框
+        drawCurrentPlayer(g);
         //绘制广播文字
         drawBroadText(g);
         //绘制地图上的建筑
@@ -257,6 +260,28 @@ public class GameWindow extends JPanel{
         }
     }
 
+    private void drawCurrentPlayer(Graphics g)
+    {
+        g.setColor(Color.GREEN);
+        switch(currentPlayerID)
+        {
+            case 0:
+                g.drawRect(45,415,110,110);
+                break;
+            case 1:
+                g.drawRect(775,15,110,110);
+                break;
+            case 2:
+                g.drawRect(1535,415,110,110);
+                break;
+            case 3:
+                g.drawRect(1055,835,110,110);
+                break;
+            case 4:
+                g.drawRect(475,835,110,110);
+                break;
+        }
+    }
     private void drawPlayers(Graphics g)
     {
         for(int i = 0 ; i < Client.playerNum;i++)
@@ -436,12 +461,6 @@ public class GameWindow extends JPanel{
         repaint();
     }
 
-    //收租
-    public void collectRent()
-    {
-
-    }
-
     public void rollDice()
     {
         if(isDicing) return;
@@ -551,5 +570,13 @@ public class GameWindow extends JPanel{
     {
         this.grid = grid;
         grid.stepEvent(player);
+    }
+
+    public int getCurrentPlayerID() {
+        return currentPlayerID;
+    }
+
+    public void setCurrentPlayerID(int currentPlayerID) {
+        this.currentPlayerID = currentPlayerID;
     }
 }

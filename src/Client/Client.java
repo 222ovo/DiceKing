@@ -29,6 +29,12 @@ public class Client {
                         player.setGameState(GameState.RUNNING);
                         player.getGameWindow().initGame();
                     }
+                    else if(msg.startsWith("UpdateCurrentPlayer"))
+                    {
+                        int id = Integer.parseInt(msg.substring("UpdateCurrentPlayer".length()));
+                        player.getGameWindow().setCurrentPlayerID(id);
+                        player.getGameWindow().repaint();
+                    }
                     else if(msg.startsWith("UpdatePlayerGold"))
                     {
                         msg = msg.substring("UpdatePlayerGold".length());

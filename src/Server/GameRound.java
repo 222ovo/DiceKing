@@ -37,6 +37,7 @@ public class GameRound {
                 player.isStay = false;
                 continue;
             }
+            Server.sendMsgForAll("UpdateCurrentPlayer" + id);
             player.sendMsg("YourRound");   //给玩家发信息
             isRound = true;
             while(isRound) {
