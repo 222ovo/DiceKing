@@ -26,18 +26,18 @@ public class GameWindow extends JPanel{
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
     //游戏背景图
-    ImageIcon back = new ImageIcon("BackGround.jpg");
+    ImageIcon back = new ImageIcon("Image/BackGround.jpg");
     JLabel bg = new JLabel(back);
     //准备按钮图
-    ImageIcon ready = new ImageIcon("ready.png");
+    ImageIcon ready = new ImageIcon("Image/ready.png");
     private JButton readyButton = new JButton(ready);
     //取消准备按钮图
-    ImageIcon unReady = new ImageIcon("unready.png");
+    ImageIcon unReady = new ImageIcon("Image/unready.png");
     //购买按钮图
-    ImageIcon buy = new ImageIcon("Buy.png");
+    ImageIcon buy = new ImageIcon("Image/Buy.png");
     private JButton buyButton = new JButton(buy);
     //结束按钮图
-    ImageIcon over = new ImageIcon("Over.png");
+    ImageIcon over = new ImageIcon("Image/Over.png");
     JButton overButton = new JButton(over);
     //广播文字框
     Image broadcast = Toolkit.getDefaultToolkit()
@@ -45,24 +45,24 @@ public class GameWindow extends JPanel{
     private String broadText = "玩家获得了2000金币";
     private final Timer timer;
     //骰子的图片
-    ImageIcon dice1 = new ImageIcon("Dice1.png");
-    ImageIcon dice2 = new ImageIcon("Dice2.png");
-    ImageIcon dice3 = new ImageIcon("Dice3.png");
-    ImageIcon dice4 = new ImageIcon("Dice4.png");
-    ImageIcon dice5 = new ImageIcon("Dice5.png");
-    ImageIcon dice6 = new ImageIcon("Dice6.png");
+    ImageIcon dice1 = new ImageIcon("Image/Dice1.png");
+    ImageIcon dice2 = new ImageIcon("Image/Dice2.png");
+    ImageIcon dice3 = new ImageIcon("Image/Dice3.png");
+    ImageIcon dice4 = new ImageIcon("Image/Dice4.png");
+    ImageIcon dice5 = new ImageIcon("Image/Dice5.png");
+    ImageIcon dice6 = new ImageIcon("Image/Dice6.png");
     //投资帧动画
-    ImageIcon diceAnim1 = new ImageIcon("DiceFrame1.png");
-    ImageIcon diceAnim2 = new ImageIcon("DiceFrame2.png");
-    ImageIcon diceAnim3 = new ImageIcon("DiceFrame3.png");
-    ImageIcon diceAnim4 = new ImageIcon("DiceFrame4.png");
+    ImageIcon diceAnim1 = new ImageIcon("Image/DiceFrame1.png");
+    ImageIcon diceAnim2 = new ImageIcon("Image/DiceFrame2.png");
+    ImageIcon diceAnim3 = new ImageIcon("Image/DiceFrame3.png");
+    ImageIcon diceAnim4 = new ImageIcon("Image/DiceFrame4.png");
     JButton diceButton = new JButton(dice1);
-    ImageIcon win0 = new ImageIcon("0win.png");
-    ImageIcon win1 = new ImageIcon("1win.png");
-    ImageIcon win2 = new ImageIcon("2win.png");
-    ImageIcon win3 = new ImageIcon("3win.png");
+    ImageIcon win0 = new ImageIcon("Image/0Win.png");
+    ImageIcon win1 = new ImageIcon("Image/1Win.png");
+    ImageIcon win2 = new ImageIcon("Image/2Win.png");
+    ImageIcon win3 = new ImageIcon("Image/3Win.png");
 
-    ImageIcon win4 = new ImageIcon("4win.png");
+    ImageIcon win4 = new ImageIcon("Image/4Win.png");
     JLabel win = new JLabel(win0);
     public GameWindow()
     {

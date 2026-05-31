@@ -12,6 +12,7 @@ import java.util.List;
 public class Server {
     public static final ArrayList<ServerPlayer> players = new ArrayList<>();
     public static final int MAX_PLAYER = 5;
+    public static UTFBroadcast utfBroadcast;
     public static void main(String[] args) throws Exception
     {
         InetAddress localAddr = NetUtil.getLocalHostLANAddress();
@@ -19,7 +20,8 @@ public class Server {
 
         ServerSocket server = new ServerSocket(8888, 50, localAddr);
         System.out.println("服务器已启动!");
-        new UTFBroadcast(localAddr).start();
+        utfBroadcast = new UTFBroadcast(localAddr);
+        utfBroadcast.start();
         PlayerManager playerManager = new PlayerManager();
         while(true)
         {

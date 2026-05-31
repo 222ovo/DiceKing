@@ -18,6 +18,7 @@ class GameThread extends Thread {//一局游戏的多线程类
     @Override
     public void run() {
         GameRound game = new GameRound(players);
+        Server.utfBroadcast.isRunning = false;
         game.gameStart();//开始一轮游戏
     }
 }

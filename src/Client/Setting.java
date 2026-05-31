@@ -49,7 +49,7 @@ public class Setting {
     public static final int PLAYER4_Y = 240;
     public static final Color PLAYER4_COLOR = Color.GRAY;
     //每回合玩家获得的金币
-    public static final int ROUND_BOUNDS = 1000;
+    public static final int ROUND_BOUNDS = 2000;
     //初始移动方向
     public static final MoveDir INITIAL_DIR = MoveDir.RIGHT;
     //基础租金
@@ -57,5 +57,5 @@ public class Setting {
     //基础倍率
     public static final int MAGIFICATION = 1;
     //破产金额
-    public static final int bankruptcy = 1000;
+    public static final int bankruptcy = -1000;
 }

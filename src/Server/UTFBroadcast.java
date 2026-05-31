@@ -6,12 +6,15 @@ import java.net.*;
 public class UTFBroadcast extends Thread{
 
     InetAddress ip;
+    boolean isRunning;
     public UTFBroadcast(InetAddress ip)
     {
         this.ip = ip;
+        this.isRunning = true;
     }
     @Override
     public void run(){
+        if(!isRunning) return;
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket();
@@ -19,7 +22,7 @@ public class UTFBroadcast extends Thread{
             throw new RuntimeException(e);
         }
 
-        while(true)
+        while(isRunning)
         {
             String msg = "Server" + ip.toString();
 
