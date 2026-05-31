@@ -68,7 +68,7 @@ public class Player{
         } catch (IOException e) {
             System.out.println("断开连接");
         }
-        MapLoader.initialMap();
+        MapLoader.loadGame();
         gameWindow = new GameWindow();
         gameWindow.setPlayer(this);
     }

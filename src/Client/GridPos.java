@@ -1,9 +1,10 @@
 package Client;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 //坐标类
-public class GridPos {
+public class GridPos implements Serializable {
     public int x;
     public int y;
 
