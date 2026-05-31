@@ -109,6 +109,25 @@ public class Client {
                         }
                         player.getGameWindow().setBroadText("不幸的玩家" + playerId + "回到了原点");
                     }
+                    else if(msg.equals("Over"))
+                    {
+                        player.getGameWindow().round--;
+                    }
+                    else if(msg.startsWith("collectRent"))
+                    {
+                        int rent = Integer.parseInt(msg.substring("collectRent".length()));
+                        System.out.println("到了收租金的时候了,你支付了" + rent);
+                        for(PlayerData playerData : Player.playerDataList)
+                        {
+                            if(playerData.isAlive)
+                            {
+                                PlayerData.changePlayerGold(String.valueOf(playerData.getId()),rent*(-1));
+                            }
+                        }
+                        player.getGameWindow().round = Client.playerNum * Client.playerNum;
+                        player.getGameWindow().magnification++;
+                        player.getGameWindow().setBroadText("到了收租金的时候了,你支付了" + rent);
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

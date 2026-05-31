@@ -52,4 +52,8 @@ public class Setting {
     public static final int ROUND_BOUNDS = 1000;
     //初始移动方向
     public static final MoveDir INITIAL_DIR = MoveDir.RIGHT;
+    //基础租金
+    public static final int BASE_RENT = 100;
+    //基础倍率
+    public static final int MAGIFICATION = 1;
 }

@@ -20,17 +20,17 @@ public class BuildingGrid extends Grid implements Serializable {
             return;
         }
 
-        if(building.getId() != -1) {
-            //如果当前土地的购买人不是自己
-            if (building.getId() != player.getId()) {
-                //付钱
-                //给玩家building的所有者付钱
-                player.sendMsg("Pay" + building.getRevenue() + "|" + building.getId());
-            } else {
-                player.getGameWindow().getBuyButton().setVisible(true);
-                player.getGameWindow().setBroadText("是否购费" + building.getPrice() + "元来购买" + building.getName() + "?");
-                player.getGameWindow().repaint();
-            }
+        if(building.getId() == -1)
+        {
+            player.getGameWindow().getBuyButton().setVisible(true);
+            player.getGameWindow().setBroadText("是否购费" + building.getPrice() + "元来购买" + building.getName() + "?");
+            player.getGameWindow().repaint();
+        }
+        else if(building.getId() != -1 && building.getId() != player.getId())
+        {
+            //付钱
+            //给玩家building的所有者付钱
+            player.sendMsg("Pay" + building.getRevenue() + "|" + building.getId());
         }
     }
 

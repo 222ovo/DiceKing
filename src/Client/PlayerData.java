@@ -7,6 +7,7 @@ public class PlayerData {
     int y;
     private int gold;
     private int id = -1;
+    public boolean isAlive = true;
     private Color color;
 
     public PlayerData(int x,int y,int gold,int id,Color color)

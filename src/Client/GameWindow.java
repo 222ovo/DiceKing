@@ -1,5 +1,7 @@
 package Client;
 
+import Server.Server;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,6 +18,9 @@ public class GameWindow extends JPanel{
     Dice dice = new Dice();
     public boolean isDicing = false;
     private Grid grid;  //玩家当前所在的格子
+    public int round;   //清算倒计时
+    public int magnification = Setting.MAGIFICATION;    //基础倍率
+    public int baseRent = Setting.BASE_RENT; //基础租金
     //游戏主框架
     JFrame mainFrame = new JFrame("Game");
     JLayeredPane layeredPane = new JLayeredPane();
@@ -238,6 +243,8 @@ public class GameWindow extends JPanel{
         drawBroadText(g);
         //绘制地图上的建筑
         drawBuilding(g);
+        //画回合数
+        drawRound(g);
     }
 
     //画地图
@@ -413,7 +420,14 @@ public class GameWindow extends JPanel{
     public void initGame()
     {
         readyButton.setVisible(false);
+        round = Client.playerNum * Client.playerNum;
         repaint();
+    }
+
+    //收租
+    public void collectRent()
+    {
+
     }
 
     public void rollDice()
@@ -453,6 +467,13 @@ public class GameWindow extends JPanel{
         swingTimer.start();
     }
 
+    public void drawRound(Graphics g)
+    {
+        Font font = new Font("微软雅黑", Font.PLAIN, 16);
+        g.setFont(font);
+        g.setColor(Color.RED);
+        g.drawString("距离收租金还剩" + round + "回合" + "，当前租金：" + baseRent*magnification,530,400);
+    }
     public void drawPlayersOnMap(Graphics g)
     {
         if(player.getGameState() == GameState.RUNNING)

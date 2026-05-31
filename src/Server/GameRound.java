@@ -7,7 +7,11 @@ import java.util.Random;
 
 public class GameRound {
     private ArrayList<ServerPlayer> players;//玩家列表
+    private ArrayList<ServerPlayer> alivePlayers;   //仍存活的玩家
     private int id; //当前回合的玩家id
+    private int round;   //清算倒计时
+    private int magnification = 1;   //倍率
+    private int baseRent = 100; //基础租金
     public GameRound(ArrayList<ServerPlayer> players)
     {
         this.players = players;
@@ -17,6 +21,8 @@ public class GameRound {
     {
         Random r = new Random();
         id = r.nextInt(0,players.size());//选出进行回合的玩家
+        alivePlayers = new ArrayList<>(players);
+        round = alivePlayers.size() * alivePlayers.size();
 
         while(true)
         {
@@ -83,6 +89,14 @@ public class GameRound {
                 else if(msg.equals("Over"))
                 {
                     System.out.println("玩家" + id + "回合结束");
+                    round--;
+                    Server.sendMsgForAll("Over");
+                    if(round == 0)
+                    {
+                        round = alivePlayers.size() * alivePlayers.size();
+                        Server.sendMsgForAll("collectRent" + baseRent*magnification);
+                        magnification++;
+                    }
                     break;
                 }
             }
