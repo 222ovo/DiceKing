@@ -6,6 +6,8 @@ import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -35,7 +37,25 @@ public class Player{
     public Player()
     {
         try {
-            String ip = "192.168.28.63";
+            String ip;
+            DatagramSocket dataSocket = new DatagramSocket(8888);
+            byte[] buffer = new byte[1024 * 64]; //1kb
+            DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
+
+            while (true) {
+                dataSocket.receive(packet);
+
+                int len = packet.getLength();
+
+                String rs = new String(buffer,0,len);
+                System.out.println(rs);
+                if(rs.startsWith("Server"))
+                {
+                    System.out.println(rs);
+                    ip = rs.substring("Server".length()+1);
+                    break;
+                }
+            }
             InetSocketAddress socketAddress = new InetSocketAddress(ip,8888);
             socket.connect(socketAddress);
             System.out.println("连接成功");

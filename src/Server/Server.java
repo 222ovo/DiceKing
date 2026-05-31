@@ -19,6 +19,7 @@ public class Server {
 
         ServerSocket server = new ServerSocket(8888, 50, localAddr);
         System.out.println("服务器已启动!");
+        new UTFBroadcast(localAddr).start();
         PlayerManager playerManager = new PlayerManager();
         while(true)
         {
