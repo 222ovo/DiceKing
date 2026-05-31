@@ -56,4 +56,6 @@ public class Setting {
     public static final int BASE_RENT = 100;
     //基础倍率
     public static final int MAGIFICATION = 1;
+    //破产金额
+    public static final int bankruptcy = 1000;
 }

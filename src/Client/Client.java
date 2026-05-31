@@ -128,6 +128,24 @@ public class Client {
                         player.getGameWindow().magnification++;
                         player.getGameWindow().setBroadText("到了收租金的时候了,你支付了" + rent);
                     }
+                    else if(msg.equals("CheckBankruptcy"))
+                    {
+                        StringBuilder bankruptcyPlayer = new StringBuilder();
+                        bankruptcyPlayer.append("bankruptcy");
+                        for(PlayerData playerData : Player.playerDataList)
+                        {
+                            if(playerData.isAlive)
+                            {
+                                if(playerData.getGold() <= Setting.bankruptcy)
+                                {
+                                    System.out.println("玩家" + playerData.getId() + "已破产");
+                                    playerData.isAlive = false;
+                                    bankruptcyPlayer.append(playerData.getId()).append("|");
+                                }
+                            }
+                        }
+                        player.sendMsg(bankruptcyPlayer.toString());
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

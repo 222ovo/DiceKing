@@ -42,6 +42,7 @@ public class GameWindow extends JPanel{
     Image broadcast = Toolkit.getDefaultToolkit()
             .getImage(getClass().getResource("BroadcastField.png"));
     private String broadText = "玩家获得了2000金币";
+    private Timer timer;
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Dice1.png");
     ImageIcon dice2 = new ImageIcon("Dice2.png");
@@ -112,7 +113,7 @@ public class GameWindow extends JPanel{
         mainFrame.getLayeredPane().add(overButton);
 
         //定期给服务端发送消息，避免线程阻塞
-        Timer timer = new Timer(1000,e -> {
+        timer = new Timer(1000,e -> {
             try {
                 player.getOutputStream().writeUTF("Fresh");
             } catch (IOException ex) {
@@ -263,9 +264,11 @@ public class GameWindow extends JPanel{
             switch(i) {
                 case 0:
                 {
-                    g.setColor(Color.PINK);
+                    g.setColor(Color.GRAY);
+                    if(Player.playerDataList.get(0).isAlive) g.setColor(Color.PINK);
                     g.fillRect(50, 420, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
-                    g.setColor(Color.YELLOW);
+
+                    if(Player.playerDataList.get(0).isAlive) g.setColor(Color.YELLOW);
                     g.fillRect(70, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(115, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 0) {
@@ -273,11 +276,13 @@ public class GameWindow extends JPanel{
                     }
                     g.drawString("金币:" + Player.playerDataList.get(0).getGold(),40,580);
                 }
-                    break;
+                break;
                 case 1: {
-                    g.setColor(Color.YELLOW);
+                    g.setColor(Color.GRAY);
+                    if(Player.playerDataList.get(1).isAlive) g.setColor(Color.YELLOW);
                     g.fillRect(780, 20, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
-                    g.setColor(Color.BLUE);
+
+                    if(Player.playerDataList.get(1).isAlive) g.setColor(Color.WHITE);
                     g.fillRect(800, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(845, 40, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 1) {
@@ -285,11 +290,13 @@ public class GameWindow extends JPanel{
                     }
                     g.drawString("金币:" + Player.playerDataList.get(1).getGold(),770,180);
                 }
-                    break;
+                break;
                 case 2: {
-                    g.setColor(Color.RED);
+                    g.setColor(Color.GRAY);
+                    if(Player.playerDataList.get(2).isAlive) g.setColor(Color.RED);
                     g.fillRect(1540, 420, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
-                    g.setColor(Color.YELLOW);
+
+                    if(Player.playerDataList.get(2).isAlive) g.setColor(Color.YELLOW);
                     g.fillRect(1560, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(1605, 440, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 2) {
@@ -297,11 +304,13 @@ public class GameWindow extends JPanel{
                     }
                     g.drawString("金币:" + Player.playerDataList.get(2).getGold(),1530,580);
                 }
-                    break;
+                break;
                 case 3: {
-                    g.setColor(Color.ORANGE);
+                    g.setColor(Color.GRAY);
+                    if(Player.playerDataList.get(3).isAlive) g.setColor(Color.ORANGE);
                     g.fillRect(1060, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
-                    g.setColor(Color.BLUE);
+
+                    if(Player.playerDataList.get(3).isAlive) g.setColor(Color.GREEN);
                     g.fillRect(1080, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(1125, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 3) {
@@ -309,11 +318,13 @@ public class GameWindow extends JPanel{
                     }
                     g.drawString("金币:" + Player.playerDataList.get(3).getGold(),1050,1000);
                 }
-                    break;
+                break;
                 case 4: {
                     g.setColor(Color.GRAY);
+                    if(Player.playerDataList.get(4).isAlive) g.setColor(Color.GREEN);
                     g.fillRect(480, 840, Setting.PLAYER_HEAD_WIDTH, Setting.PLAYER_HEAD_HEIGHT);
-                    g.setColor(Color.BLUE);
+
+                    if(Player.playerDataList.get(4).isAlive) g.setColor(Color.BLUE);
                     g.fillRect(500, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     g.fillRect(545, 860, Setting.PLAYER_EYE_WIDTH, Setting.PLAYER_EYE_HEIGHT);
                     if (player.getId() == 4) {
@@ -321,7 +332,7 @@ public class GameWindow extends JPanel{
                     }
                     g.drawString("金币:" + Player.playerDataList.get(4).getGold(),470,1000);
                 }
-                    break;
+                break;
             }
         }
     }
@@ -419,6 +430,7 @@ public class GameWindow extends JPanel{
 
     public void initGame()
     {
+        timer.stop();
         readyButton.setVisible(false);
         round = Client.playerNum * Client.playerNum;
         repaint();

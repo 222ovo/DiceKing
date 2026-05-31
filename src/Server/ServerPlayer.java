@@ -17,9 +17,11 @@ public class ServerPlayer{
     private DataOutputStream out;
     private int id;
     public boolean isStay = false;
+    public boolean isAlive;
     public ServerPlayer(Socket socket,int id) {
         this.id = id;
         this.socket = socket;
+        this.isAlive = true;
         try {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());

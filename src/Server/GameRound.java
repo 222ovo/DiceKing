@@ -3,6 +3,7 @@ package Server;
 import Client.Client;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class GameRound {
@@ -12,6 +13,7 @@ public class GameRound {
     private int round;   //清算倒计时
     private int magnification = 1;   //倍率
     private int baseRent = 100; //基础租金
+    private boolean isRound = false;
     public GameRound(ArrayList<ServerPlayer> players)
     {
         this.players = players;
@@ -28,14 +30,16 @@ public class GameRound {
         {
             id = (id+1)%players.size(); //当前玩家回合
             ServerPlayer player = players.get(id);
+            if (!player.isAlive) continue;
+
             if(player.isStay)
             {
                 player.isStay = false;
                 continue;
             }
             player.sendMsg("YourRound");   //给玩家发信息
-
-            while(true) {
+            isRound = true;
+            while(isRound) {
                 //掷骰子的人和发消息的人一定是玩家id
                 String msg = player.receiveMsg();
                 if (msg.startsWith("UpdatePlayerPos")) {
@@ -97,7 +101,23 @@ public class GameRound {
                         Server.sendMsgForAll("collectRent" + baseRent*magnification);
                         magnification++;
                     }
-                    break;
+                    isRound = false;
+                }
+                Server.sendMsgForAll("CheckBankruptcy");
+                msg = player.receiveMsg();
+                if(msg.startsWith("bankruptcy"))
+                {
+                    msg = msg.substring("bankruptcy".length());
+                    String[] parts = msg.split("\\|");
+                    for(String part : parts)
+                    {
+                        if(!Objects.equals(part, ""))
+                        {
+                            int id = Integer.parseInt(part);
+                            players.get(id).isAlive = false;
+                            System.out.println("玩家" + id + "已破产");
+                        }
+                    }
                 }
             }
         }
