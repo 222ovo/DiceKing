@@ -30,26 +30,6 @@ public class ServerPlayer{
         }
     }
 
-//    @Override
-//    public void run() {
-//        try {
-//            while (true) {
-//                String msg = in.readUTF();
-//                if (msg == null) break;
-//
-//                System.out.println("收到：" + msg);
-//            }
-//        } catch (EOFException e) {
-//            System.out.println("客户端正常断开");
-//            removePlayer(this);
-//            Server.updatePlayersNum();
-//        } catch (IOException e) {
-//            System.out.println("客户端异常断开");
-//            removePlayer(this);
-//            Server.updatePlayersNum();
-//        }
-//    }
-
     //发送信息
     public void sendMsg(String s)
     {
@@ -71,11 +51,6 @@ public class ServerPlayer{
             throw new RuntimeException(e);
         }
     }
-
-//    //移除玩家
-//    public void removePlayer(ServerPlayer socket) {
-//        Server.players.remove(socket);
-//    }
 
     void safeDisconnect() {
         // 1️⃣ 先移除（防止再广播）

@@ -12,7 +12,7 @@ public class BuildingGrid extends Grid implements Serializable {
         this.building = building;
         color = Setting.BUILDING_GRID_COLOR;
     }
-    //普通格子，空实现
+    //建筑格子
     public void stepEvent(Player player) {
         if(building == null)
         {
