@@ -33,8 +33,8 @@ public class MapLoader {
             player.sendMsg("UpdatePlayerGold" + 800);
             player.getGameWindow().setBroadText("一位顾客在你的店拿出了百万英镑,名气大涨，获得800元");
         });
-        fateList.add(player -> {});
-        fateList.add(player -> {});
+//        fateList.add(player -> {});
+//        fateList.add(player -> {});
         EventGrid grid1 = new EventGrid(new GridPos(300,200),"起点",player -> {
         });
         map.put(grid1.getGridPos(),grid1);

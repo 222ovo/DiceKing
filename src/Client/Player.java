@@ -35,7 +35,7 @@ public class Player{
     public Player()
     {
         try {
-            String ip = "192.168.12.63";
+            String ip = "192.168.28.63";
             InetSocketAddress socketAddress = new InetSocketAddress(ip,8888);
             socket.connect(socketAddress);
             System.out.println("连接成功");

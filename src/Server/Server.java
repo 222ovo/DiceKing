@@ -14,7 +14,7 @@ public class Server {
     public static final int MAX_PLAYER = 5;
     public static void main(String[] args) throws Exception
     {
-        ServerSocket server = new ServerSocket(8888, 50, InetAddress.getByName("192.168.12.63"));
+        ServerSocket server = new ServerSocket(8888, 50, InetAddress.getByName("192.168.28.63"));
         System.out.println("服务器已启动!");
         PlayerManager playerManager = new PlayerManager();
         while(true)
