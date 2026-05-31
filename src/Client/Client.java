@@ -151,6 +151,7 @@ public class Client {
                             }
                         }
                         player.sendMsg(bankruptcyPlayer.toString());
+                        player.getGameWindow().checkGameOver();
                     }
                 }
             } catch (IOException e) {

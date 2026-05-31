@@ -57,12 +57,13 @@ public class GameWindow extends JPanel{
     ImageIcon diceAnim3 = new ImageIcon("DiceFrame3.png");
     ImageIcon diceAnim4 = new ImageIcon("DiceFrame4.png");
     JButton diceButton = new JButton(dice1);
-//    //窗口位置
-//    int x;
-//    int y;
-//    //窗口大小
-//    int width;
-//    int height;
+    ImageIcon win0 = new ImageIcon("0win.png");
+    ImageIcon win1 = new ImageIcon("1win.png");
+    ImageIcon win2 = new ImageIcon("2win.png");
+    ImageIcon win3 = new ImageIcon("3win.png");
+
+    ImageIcon win4 = new ImageIcon("4win.png");
+    JLabel win = new JLabel(win0);
     public GameWindow()
     {
         this.setBounds(0, 0,
@@ -72,6 +73,12 @@ public class GameWindow extends JPanel{
         bg.setSize(back.getIconWidth(),back.getIconHeight());
 
         mainFrame.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+
+        win.setSize(win.getIcon().getIconWidth(),win.getIcon().getIconWidth());
+        win.setBounds(new Rectangle(340,-10,win.getIcon().getIconWidth(),win.getIcon().getIconWidth()));
+        mainFrame.getLayeredPane().add(win,new Integer(Integer.MIN_VALUE));
+        layeredPane.add(win, JLayeredPane.DEFAULT_LAYER);
+        win.setVisible(false);
 
         JPanel pan = (JPanel)mainFrame.getContentPane();
         pan.setOpaque(false);
@@ -578,5 +585,50 @@ public class GameWindow extends JPanel{
 
     public void setCurrentPlayerID(int currentPlayerID) {
         this.currentPlayerID = currentPlayerID;
+    }
+
+    public void checkGameOver()
+    {
+        PlayerData winPlayer = null;
+        int n = 0;
+        for(int i = 0 ; i < Client.playerNum;i++)
+        {
+            PlayerData playerData = Player.playerDataList.get(i);
+            if(playerData.isAlive) {
+                n++;
+                winPlayer = playerData;
+            }
+        }
+        if(n <= 1) {
+            System.out.println("游戏结束");
+            gameOver(winPlayer);
+        }
+        else{
+            System.out.println("游戏继续");
+        }
+    }
+
+    public void gameOver(PlayerData playerData)
+    {
+        win.setVisible(true);
+        diceButton.setVisible(false);
+        switch (playerData.getId())
+        {
+            case 0:
+                win.setIcon(win0);
+                break;
+            case 1:
+                win.setIcon(win1);
+                break;
+            case 2:
+                win.setIcon(win2);
+                break;
+            case 3:
+                win.setIcon(win3);
+                break;
+            case 4:
+                win.setIcon(win4);
+                break;
+        }
     }
 }
