@@ -3,6 +3,7 @@ package Client;
 import Server.Server;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Client {
@@ -136,6 +137,7 @@ public class Client {
                     }
                     else if(msg.equals("CheckBankruptcy"))
                     {
+                        boolean openDieSound = false;
                         StringBuilder bankruptcyPlayer = new StringBuilder();
                         bankruptcyPlayer.append("bankruptcy");
                         for(PlayerData playerData : Player.playerDataList)
@@ -147,8 +149,13 @@ public class Client {
                                     System.out.println("玩家" + playerData.getId() + "已破产");
                                     playerData.isAlive = false;
                                     bankruptcyPlayer.append(playerData.getId()).append("|");
+                                    openDieSound = true;
                                 }
                             }
+                        }
+                        if(openDieSound) {
+                            int random = new Random().nextInt(0, AudioManager.getClipMap().size());
+                            AudioManager.PlayAudio(AudioManager.getAudioList().get(random));
                         }
                         player.sendMsg(bankruptcyPlayer.toString());
                         player.getGameWindow().checkGameOver();

@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -119,6 +120,8 @@ public class GameWindow extends JPanel{
         overButton.setOpaque(false);
         overButton.setVisible(false);
         mainFrame.getLayeredPane().add(overButton);
+
+        AudioManager.initAudio();
 
         //定期给服务端发送消息，避免线程阻塞
         timer = new Timer(1000,e -> {
@@ -514,6 +517,7 @@ public class GameWindow extends JPanel{
     }
     public void drawPlayersOnMap(Graphics g)
     {
+        if(player == null) return;
         if(player.getGameState() == GameState.RUNNING)
         {
             for(int i = 0 ; i < Client.playerNum;i++)

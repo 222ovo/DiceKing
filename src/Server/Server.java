@@ -76,23 +76,4 @@ public class Server {
                 serverPlayer.sendMsg(s);
         }
     }
-    /**
-     * @description: 给编号为id的玩家发送消息
-     * @param id 玩家的编号
-     * @param s 发送的消息
-     */
-    public static void sendMsgTo(int id,String s)
-    {
-        players.get(id).sendMsg(s);
-    }
-
-    /**
-     * @title: 玩家金币改变
-     * @param id 需要改变的玩家id
-     * @param changeNum 需要改变的数量
-     */
-    public static void playerGoldChange(String id,int changeNum)
-    {
-        sendMsgForAll("UpdatePlayerGold" + id + changeNum);
-    }
 }
