@@ -26,8 +26,7 @@ public class PlayerMsg extends Thread{
      */
     @Override
     public void run() {
-        while (isRunning && !gameReady());//所有玩家都准备后break
-
+        while (!gameReady());//所有玩家都准备后break
         //只开启一个游戏线程
         if(player.getId() == 0)
             new GameThread(Server.players).start();//开始游戏
