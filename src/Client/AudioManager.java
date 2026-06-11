@@ -11,19 +11,11 @@ import java.util.Map;
 
 public class AudioManager {
 
-    /* ================= 单例 ================= */
     public static final AudioManager Instance = new AudioManager();
-
-    /* ================= 音频字典 ================= */
     private static final Map<String, Clip> audioMap = new HashMap<>();
     private static final List<String> audioList = new ArrayList<>();
-
-    /* ================= 私有构造 ================= */
     private AudioManager() {}
 
-    /* ================= 对外接口 ================= */
-
-    /** 注册音乐（提前加载） */
     public static void RegisterAudio(String name, String filePath,boolean loop) {
         try {
             AudioInputStream ais =
@@ -54,7 +46,6 @@ public class AudioManager {
         RegisterAudio("die6", "Sound/dieSound6.wav",false);
         RegisterAudio("die7", "Sound/dieSound7.wav",false);
     }
-    /** 播放音乐 */
     public static void PlayAudio(String name) {
         Clip clip = Instance.audioMap.get(name);
         if (clip == null) {
@@ -68,7 +59,6 @@ public class AudioManager {
         }
     }
 
-    /** 停止指定音乐 */
     public static void StopAudio(String name) {
         Clip clip = Instance.audioMap.get(name);
         if (clip == null) {
@@ -81,7 +71,6 @@ public class AudioManager {
         }
     }
 
-    /** 停止所有音乐 */
     public static void StopAllAudio() {
         for (Clip clip : Instance.audioMap.values()) {
             if (clip.isRunning()) {

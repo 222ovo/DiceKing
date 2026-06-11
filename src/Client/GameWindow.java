@@ -67,62 +67,7 @@ public class GameWindow extends JPanel{
     JLabel win = new JLabel(win0);
     public GameWindow()
     {
-        this.setBounds(0, 0,
-                back.getIconWidth(),
-                back.getIconHeight());
-        setOpaque(false);
-        bg.setSize(back.getIconWidth(),back.getIconHeight());
-
-        mainFrame.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
-
-        win.setSize(win.getIcon().getIconWidth(),win.getIcon().getIconWidth());
-        win.setBounds(new Rectangle(340,-10,win.getIcon().getIconWidth(),win.getIcon().getIconWidth()));
-        mainFrame.getLayeredPane().add(win,new Integer(Integer.MIN_VALUE));
-        layeredPane.add(win, JLayeredPane.DEFAULT_LAYER);
-        win.setVisible(false);
-
-        JPanel pan = (JPanel)mainFrame.getContentPane();
-        pan.setOpaque(false);
-        pan.setLayout(new FlowLayout());
-
-        layeredPane.setLayout(null);
-        layeredPane.add(bg, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(this, JLayeredPane.POPUP_LAYER);
-
-        mainFrame.setContentPane(layeredPane);
-        mainFrame.setSize(back.getIconWidth(),back.getIconHeight());
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
-
-        readyButton.setContentAreaFilled(false);
-        readyButton.setBorder(null);
-        readyButton.setBounds(1920 / 2 - ready.getIconWidth() - 40, 1080 / 2 + ready.getIconHeight(), ready.getIconWidth()-1, ready.getIconHeight());
-        readyButton.setOpaque(false);
-        mainFrame.getLayeredPane().add(readyButton);
-
-        diceButton.setContentAreaFilled(false);
-        diceButton.setBorder(null);
-        diceButton.setBounds(1920 / 2 - diceButton.getIcon().getIconWidth() - 40, 1080 / 2 - diceButton.getIcon().getIconHeight() + 80, diceButton.getIcon().getIconWidth()-1,diceButton.getIcon().getIconHeight());
-        diceButton.setOpaque(false);
-        mainFrame.getLayeredPane().add(diceButton);
-
-        buyButton.setContentAreaFilled(false);
-        buyButton.setBorder(null);
-        buyButton.setBounds(1920 / 2 - 2 * buyButton.getIcon().getIconWidth() - 120, 1080 / 2  + 70, buyButton.getIcon().getIconWidth()-1,buyButton.getIcon().getIconHeight());
-        buyButton.setOpaque(false);
-        buyButton.setVisible(false);
-        mainFrame.getLayeredPane().add(buyButton);
-
-        overButton.setContentAreaFilled(false);
-        overButton.setBorder(null);
-        overButton.setBounds(1920 / 2 + overButton.getIcon().getIconWidth()/2 - 40, 1080 / 2  + 70, overButton.getIcon().getIconWidth()-1,overButton.getIcon().getIconHeight());
-        overButton.setOpaque(false);
-        overButton.setVisible(false);
-        mainFrame.getLayeredPane().add(overButton);
-
-        AudioManager.initAudio();
-
+        initGameWindow();
         //定期给服务端发送消息，避免线程阻塞
         timer = new Timer(1000,e -> {
             try {
@@ -133,101 +78,6 @@ public class GameWindow extends JPanel{
         });
 
         timer.start();
-        readyButton.addActionListener(e -> {
-            if(!player.isReady) {
-                player.isReady = true;
-                readyButton.setIcon(unReady);
-                System.out.println("玩家" + player.getId() + "已准备");
-                try {
-                    player.getOutputStream().writeUTF("ready");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            else if(player.isReady){
-                player.isReady = false;
-                readyButton.setIcon(ready);
-                System.out.println("玩家" + player.getId() + "取消准备");
-                try {
-                    player.getOutputStream().writeUTF("unready");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        buyButton.addActionListener(e -> {
-            Building building = ((BuildingGrid)grid).getBuilding();
-            if(Player.playerDataList.get(player.getId()).getGold() < building.getPrice())
-            {
-                System.out.println("你的金币不足以购买" + building.getName());
-                setBroadText("你的金币不足以购买" + building.getName());
-                return;
-            }
-
-            building.setId(player.getId());
-            player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
-            setBroadText("你购买了" + building.getName());
-            buyButton.setVisible(false);
-            repaint();
-        });
-
-        overButton.addActionListener(e -> {
-            overButton.setVisible(false);
-            buyButton.setVisible(false);
-            player.sendMsg("Over");
-            player.isRound = false;
-        });
-        mainFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    // 1. 发送退出消息
-                      player.sendMsg("quit");
-                    System.exit(0); // 直接结束进程
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    System.exit(0);
-                }
-            }
-        });
-
-        diceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(player.isRound)
-                    rollDice();
-            }
-        });
-        addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                int x = e.getX();
-                int y = e.getY();
-                if(160 <= x && x <= 200 && 420 <= y && y <= 480)
-                {
-                    System.out.println("打开玩家" + 0 + "的房产本");
-                }
-                if(890 <= x && x <= 930 && 20 <= y && y <= 80)
-                {
-                    System.out.println("打开玩家" + 1 + "的房产本");
-                }
-                if(1650 <= x && x <= 1690 && 420 <= y && y <= 480)
-                {
-                    System.out.println("打开玩家" + 2 + "的房产本");
-                }
-                if(1170 <= x && x <= 1190 && 840 <= y && y <= 900)
-                {
-                    System.out.println("打开玩家" + 3 + "的房产本");
-                }
-                if(270 <= x && x <= 290 && 420 <= y && y <= 480)
-                {
-                    System.out.println("打开玩家" + 4 + "的房产本");
-                }
-            }
-        });
     }
 
     public void setPlayer(Player player){
@@ -634,5 +484,168 @@ public class GameWindow extends JPanel{
                 win.setIcon(win4);
                 break;
         }
+    }
+
+    public void initView()
+    {
+        this.setBounds(0, 0,
+                back.getIconWidth(),
+                back.getIconHeight());
+        setOpaque(false);
+        bg.setSize(back.getIconWidth(),back.getIconHeight());
+
+        mainFrame.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+
+        win.setSize(win.getIcon().getIconWidth(),win.getIcon().getIconWidth());
+        win.setBounds(new Rectangle(340,-10,win.getIcon().getIconWidth(),win.getIcon().getIconWidth()));
+        mainFrame.getLayeredPane().add(win,new Integer(Integer.MIN_VALUE));
+        layeredPane.add(win, JLayeredPane.DEFAULT_LAYER);
+        win.setVisible(false);
+
+        JPanel pan = (JPanel)mainFrame.getContentPane();
+        pan.setOpaque(false);
+        pan.setLayout(new FlowLayout());
+
+        layeredPane.setLayout(null);
+        layeredPane.add(bg, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(this, JLayeredPane.POPUP_LAYER);
+
+        mainFrame.setContentPane(layeredPane);
+        mainFrame.setSize(back.getIconWidth(),back.getIconHeight());
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
+
+        readyButton.setContentAreaFilled(false);
+        readyButton.setBorder(null);
+        readyButton.setBounds(1920 / 2 - ready.getIconWidth() - 40, 1080 / 2 + ready.getIconHeight(), ready.getIconWidth()-1, ready.getIconHeight());
+        readyButton.setOpaque(false);
+        mainFrame.getLayeredPane().add(readyButton);
+
+        diceButton.setContentAreaFilled(false);
+        diceButton.setBorder(null);
+        diceButton.setBounds(1920 / 2 - diceButton.getIcon().getIconWidth() - 40, 1080 / 2 - diceButton.getIcon().getIconHeight() + 80, diceButton.getIcon().getIconWidth()-1,diceButton.getIcon().getIconHeight());
+        diceButton.setOpaque(false);
+        mainFrame.getLayeredPane().add(diceButton);
+
+        buyButton.setContentAreaFilled(false);
+        buyButton.setBorder(null);
+        buyButton.setBounds(1920 / 2 - 2 * buyButton.getIcon().getIconWidth() - 120, 1080 / 2  + 70, buyButton.getIcon().getIconWidth()-1,buyButton.getIcon().getIconHeight());
+        buyButton.setOpaque(false);
+        buyButton.setVisible(false);
+        mainFrame.getLayeredPane().add(buyButton);
+
+        overButton.setContentAreaFilled(false);
+        overButton.setBorder(null);
+        overButton.setBounds(1920 / 2 + overButton.getIcon().getIconWidth()/2 - 40, 1080 / 2  + 70, overButton.getIcon().getIconWidth()-1,overButton.getIcon().getIconHeight());
+        overButton.setOpaque(false);
+        overButton.setVisible(false);
+        mainFrame.getLayeredPane().add(overButton);
+
+    }
+
+    public void initActionListener()
+    {
+        readyButton.addActionListener(e -> {
+            if(!player.isReady) {
+                player.isReady = true;
+                readyButton.setIcon(unReady);
+                System.out.println("玩家" + player.getId() + "已准备");
+                try {
+                    player.getOutputStream().writeUTF("ready");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else if(player.isReady){
+                player.isReady = false;
+                readyButton.setIcon(ready);
+                System.out.println("玩家" + player.getId() + "取消准备");
+                try {
+                    player.getOutputStream().writeUTF("unready");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        buyButton.addActionListener(e -> {
+            Building building = ((BuildingGrid)grid).getBuilding();
+            if(Player.playerDataList.get(player.getId()).getGold() < building.getPrice())
+            {
+                System.out.println("你的金币不足以购买" + building.getName());
+                setBroadText("你的金币不足以购买" + building.getName());
+                return;
+            }
+
+            building.setId(player.getId());
+            player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
+            setBroadText("你购买了" + building.getName());
+            buyButton.setVisible(false);
+            repaint();
+        });
+
+        overButton.addActionListener(e -> {
+            overButton.setVisible(false);
+            buyButton.setVisible(false);
+            player.sendMsg("Over");
+            player.isRound = false;
+        });
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    // 1. 发送退出消息
+                    player.sendMsg("quit");
+                    System.exit(0); // 直接结束进程
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    System.exit(0);
+                }
+            }
+        });
+
+        diceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(player.isRound)
+                    rollDice();
+            }
+        });
+        addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                int x = e.getX();
+                int y = e.getY();
+                if(160 <= x && x <= 200 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 0 + "的房产本");
+                }
+                if(890 <= x && x <= 930 && 20 <= y && y <= 80)
+                {
+                    System.out.println("打开玩家" + 1 + "的房产本");
+                }
+                if(1650 <= x && x <= 1690 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 2 + "的房产本");
+                }
+                if(1170 <= x && x <= 1190 && 840 <= y && y <= 900)
+                {
+                    System.out.println("打开玩家" + 3 + "的房产本");
+                }
+                if(270 <= x && x <= 290 && 420 <= y && y <= 480)
+                {
+                    System.out.println("打开玩家" + 4 + "的房产本");
+                }
+            }
+        });
+    }
+    public void initGameWindow()
+    {
+        initView();
+        AudioManager.initAudio();
+        initActionListener();
     }
 }
