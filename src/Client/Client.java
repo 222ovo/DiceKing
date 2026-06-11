@@ -11,6 +11,8 @@ public class Client {
     public static void main(String[] args)
     {
         Player player = new Player();
+        GameManager gameManager = new GameManager(player);
+        gameManager.initGame();
         while(true)
         {
             try {
@@ -168,7 +170,7 @@ public class Client {
                     AudioManager.PlayAudio(AudioManager.getAudioList().get(random));
                 }
                 player.sendMsg(bankruptcyPlayer.toString());
-                player.getGameWindow().checkGameOver();
+                GameManager.Instance.checkGameOver();
             }
         }
     }

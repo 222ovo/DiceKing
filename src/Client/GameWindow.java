@@ -45,6 +45,11 @@ public class GameWindow extends JPanel{
             .getImage(getClass().getResource("BroadcastField.png"));
     private String broadText = "玩家获得了2000金币";
     private final Timer timer;
+
+    private Runnable onReady;
+    private Runnable onBuy;
+    private Runnable onOver;
+    private Runnable onDice;
     //骰子的图片
     ImageIcon dice1 = new ImageIcon("Image/Dice1.png");
     ImageIcon dice2 = new ImageIcon("Image/Dice2.png");
@@ -65,9 +70,10 @@ public class GameWindow extends JPanel{
 
     ImageIcon win4 = new ImageIcon("Image/4Win.png");
     JLabel win = new JLabel(win0);
-    public GameWindow()
+    public GameWindow(Player player)
     {
         initGameWindow();
+        this.player = player;
         //定期给服务端发送消息，避免线程阻塞
         timer = new Timer(1000,e -> {
             try {
@@ -323,6 +329,7 @@ public class GameWindow extends JPanel{
 
     public void rollDice()
     {
+        if(!player.isRound) return;
         if(isDicing) return;
         isDicing = true;
         int[] timer = {0};
@@ -441,28 +448,7 @@ public class GameWindow extends JPanel{
         this.currentPlayerID = currentPlayerID;
     }
 
-    public void checkGameOver()
-    {
-        PlayerData winPlayer = null;
-        int n = 0;
-        for(int i = 0 ; i < Client.playerNum;i++)
-        {
-            PlayerData playerData = Player.playerDataList.get(i);
-            if(playerData.isAlive) {
-                n++;
-                winPlayer = playerData;
-            }
-        }
-        if(n <= 1) {
-            System.out.println("游戏结束");
-            gameOver(winPlayer);
-        }
-        else{
-            System.out.println("游戏继续");
-        }
-    }
-
-    public void gameOver(PlayerData playerData)
+    public void overView(PlayerData playerData)
     {
         win.setVisible(true);
         diceButton.setVisible(false);
@@ -547,50 +533,25 @@ public class GameWindow extends JPanel{
     public void initActionListener()
     {
         readyButton.addActionListener(e -> {
-            if(!player.isReady) {
-                player.isReady = true;
-                readyButton.setIcon(unReady);
-                System.out.println("玩家" + player.getId() + "已准备");
-                try {
-                    player.getOutputStream().writeUTF("ready");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            else if(player.isReady){
-                player.isReady = false;
-                readyButton.setIcon(ready);
-                System.out.println("玩家" + player.getId() + "取消准备");
-                try {
-                    player.getOutputStream().writeUTF("unready");
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
+            if(onReady != null)
+                onReady.run();
         });
 
         buyButton.addActionListener(e -> {
-            Building building = ((BuildingGrid)grid).getBuilding();
-            if(Player.playerDataList.get(player.getId()).getGold() < building.getPrice())
-            {
-                System.out.println("你的金币不足以购买" + building.getName());
-                setBroadText("你的金币不足以购买" + building.getName());
-                return;
-            }
-
-            building.setId(player.getId());
-            player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
-            setBroadText("你购买了" + building.getName());
-            buyButton.setVisible(false);
-            repaint();
+            if(onBuy != null)
+                onBuy.run();
         });
 
         overButton.addActionListener(e -> {
-            overButton.setVisible(false);
-            buyButton.setVisible(false);
-            player.sendMsg("Over");
-            player.isRound = false;
+            if(onOver != null)
+                onOver.run();
         });
+
+        diceButton.addActionListener(e -> {
+            if(onDice != null)
+                onDice.run();
+        });
+
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -606,13 +567,6 @@ public class GameWindow extends JPanel{
             }
         });
 
-        diceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(player.isRound)
-                    rollDice();
-            }
-        });
         addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e)
@@ -642,10 +596,65 @@ public class GameWindow extends JPanel{
             }
         });
     }
+
+    public void playerReady()
+    {
+        if(!player.isReady) {
+            player.isReady = true;
+            readyButton.setIcon(unReady);
+            System.out.println("玩家" + player.getId() + "已准备");  //调试信息
+            try {
+                player.getOutputStream().writeUTF("ready");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        else{
+            player.isReady = false;
+            readyButton.setIcon(ready);
+            System.out.println("玩家" + player.getId() + "取消准备");
+            try {
+                player.getOutputStream().writeUTF("unready");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    public void buyBuilding()
+    {
+        //TODO:改
+        Building building = ((BuildingGrid)grid).getBuilding();
+        if(Player.playerDataList.get(player.getId()).getGold() < building.getPrice())
+        {
+            System.out.println("你的金币不足以购买" + building.getName());
+            setBroadText("你的金币不足以购买" + building.getName());
+            return;
+        }
+
+        building.setId(player.getId());
+        player.sendMsg("Buy" + building.getName() + "|" + building.getPrice());
+        setBroadText("你购买了" + building.getName());
+        buyButton.setVisible(false);
+        repaint();
+    }
+
+    public void roundOver()
+    {
+        overButton.setVisible(false);
+        buyButton.setVisible(false);
+        player.sendMsg("Over");
+        player.isRound = false;
+    }
     public void initGameWindow()
     {
         initView();
         AudioManager.initAudio();
         initActionListener();
     }
+
+    public void addOnReady(Runnable r){ onReady = r;}
+    public void addOnBuy(Runnable r){ onBuy = r;}
+    public void addOnOver(Runnable r){ onOver = r;}
+    public void addOnDice(Runnable r){ onDice = r;}
 }
