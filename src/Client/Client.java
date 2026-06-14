@@ -8,10 +8,11 @@ import java.util.Scanner;
 
 public class Client {
     public static int playerNum = 0;
+    public static GameManager gameManager;
     public static void main(String[] args)
     {
         Player player = new Player();
-        GameManager gameManager = new GameManager(player);
+        gameManager = new GameManager(player);
         gameManager.initGame();
         while(true)
         {
@@ -170,7 +171,7 @@ public class Client {
                     AudioManager.PlayAudio(AudioManager.getAudioList().get(random));
                 }
                 player.sendMsg(bankruptcyPlayer.toString());
-                GameManager.Instance.checkGameOver();
+                gameManager.checkGameOver();
             }
         }
     }
