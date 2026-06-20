@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static java.lang.Thread.sleep;
+
 public class GameLauncher extends JFrame {
 
     private JButton startBtn, aboutBtn, exitBtn;
@@ -183,10 +185,9 @@ public class GameLauncher extends JFrame {
     // ==================== 事件处理 ====================
 
     private void onStart() {
-        dispose();//关闭启动界面
+        new Thread(Client::startGame).start();
 
-        SwingUtilities.invokeLater(() ->
-                Client.main(new String[]{}));
+        dispose();
     }
 
     private void onAbout() {

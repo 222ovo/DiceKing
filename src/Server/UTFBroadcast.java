@@ -34,7 +34,6 @@ public class UTFBroadcast extends Thread{
                 throw new RuntimeException(e);
             }
 
-            // 3.开始正式发送这个数据包的数据出去了
             try {
                 socket.send(packet);
             } catch (IOException e) {

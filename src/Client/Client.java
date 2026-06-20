@@ -10,18 +10,17 @@ import java.util.Scanner;
 public class Client {
     public static int playerNum = 0;
     public static GameManager gameManager;
-    public static void main(String[] args)
+    public static void startGame()
     {
         // 注意：这里不再直接启动游戏，而是由 GameLauncher 调用进来
         Player player = new Player();
         gameManager = new GameManager(player);
         gameManager.initGame();
 
-        while(true)
-        {
+        while (true) {
             try {
                 String msg = player.getInputStream().readUTF();
-                playerActionListener(msg,player);
+                playerActionListener(msg, player);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
