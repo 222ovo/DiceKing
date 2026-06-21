@@ -53,15 +53,15 @@ public class ServerPlayer{
     }
 
     void safeDisconnect() {
-        // 1️⃣ 先移除（防止再广播）
+        // 1️先移除（防止再广播）
         Server.players.remove(this);
         PlayerManager.Instance.getReadyPlayers().remove(this);
 
-        // 2️⃣ 关闭流
+        // 2️关闭流
         try { if (in != null) in.close(); } catch (IOException ignored) {}
         try { if (out != null) out.close(); } catch (IOException ignored) {}
 
-        // 3️⃣ 关闭 Socket
+        // 3️关闭 Socket
         try { if (socket != null && !socket.isClosed()) {
             socket.close();
         }} catch (IOException ignored) {}

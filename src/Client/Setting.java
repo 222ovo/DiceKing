@@ -57,5 +57,5 @@ public class Setting {
     //基础倍率
     public static final int MAGIFICATION = 1;
     //破产金额
-    public static final int bankruptcy = -1000;
+    public static final int bankruptcy = 0;
 }
