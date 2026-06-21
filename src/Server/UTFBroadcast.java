@@ -18,22 +18,25 @@ public class UTFBroadcast extends Thread{
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket();
+            socket.setBroadcast(true);
         } catch (SocketException e) {
             throw new RuntimeException(e);
         }
 
         while(isRunning)
         {
-            String msg = "Server" + ip.toString();
+            String msg = "Server " + ip.getHostAddress();
 
             byte[] bytes = msg.getBytes();
             DatagramPacket packet = null;
             try {
-                packet = new DatagramPacket(bytes, bytes.length, InetAddress.getLocalHost(), 8888);
+                packet = new DatagramPacket(bytes, bytes.length,
+                        InetAddress.getByName("255.255.255.255"), 8888);
             } catch (UnknownHostException e) {
                 throw new RuntimeException(e);
             }
 
+            // 3.开始正式发送这个数据包的数据出去了
             try {
                 socket.send(packet);
             } catch (IOException e) {

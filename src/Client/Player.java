@@ -39,24 +39,28 @@ public class Player{
         try {
             String ip;
             DatagramSocket dataSocket = new DatagramSocket(8888);
-            byte[] buffer = new byte[1024 * 64]; //1kb
-            DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
+            dataSocket.setBroadcast(true);
+            byte[] buffer = new byte[1024 * 64];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
+            System.out.println("Searching for game server on LAN...");
             while (true) {
                 dataSocket.receive(packet);
 
                 int len = packet.getLength();
-
-                String rs = new String(buffer,0,len);
-                System.out.println(rs);
-                if(rs.startsWith("Server"))
-                {
-                    System.out.println(rs);
-                    ip = rs.substring("Server".length()+1);
+                String rs = new String(buffer, 0, len).trim();
+                System.out.println("Broadcast received: " + rs);
+                if (rs.startsWith("Server")) {
+                    ip = rs.substring("Server".length()).trim();
+                    if (ip.startsWith("/")) {
+                        ip = ip.substring(1);
+                    }
                     break;
                 }
             }
-            InetSocketAddress socketAddress = new InetSocketAddress(ip,8888);
+            dataSocket.close();
+
+            InetSocketAddress socketAddress = new InetSocketAddress(ip, 8888);
             socket.connect(socketAddress);
             System.out.println("连接成功");
             in = new DataInputStream(this.socket.getInputStream());
