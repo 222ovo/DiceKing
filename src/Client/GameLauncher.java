@@ -192,11 +192,14 @@ public class GameLauncher extends JFrame {
 
     private void onAbout() {
         JOptionPane.showMessageDialog(this,
-                " 大富翁 · 局域网联机版\n\n" +
+                " DiceKing · 局域网联机版\n\n" +
                         "版本：v2.0\n" +
+                        "完成时间 2026.6.20" +
                         "类型：局域网多人在线桌游\n" +
                         "玩法：掷骰子、买地产、收租金\n" +
-                        "开发人员：王迁浩、沈权\n\n" +
+                        "开发人员：王迁浩 8002125150\n\n" +
+                        "开发人员：沈权 8002125147\n\n" +
+                        "班级 软件工程2505班\n" +
                         " 请确保所有玩家在同一局域网内",
                 " 关于",
                 JOptionPane.INFORMATION_MESSAGE);
